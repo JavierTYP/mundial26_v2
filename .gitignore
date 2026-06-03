@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.vercel/
+
+# local env
+.env
+.env.*.local
+
+# local database (sqlite)
+data/app.sqlite
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
