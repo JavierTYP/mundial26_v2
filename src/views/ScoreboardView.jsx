@@ -2,6 +2,15 @@ import { useEffect, useState } from "react";
 import Card from "../components/Card.jsx";
 import { apiScoreboard } from "../utils/api.js";
 
+const KNOCKOUT_SCORE_COLUMNS = [
+  { key: "16avos", label: "16avos", multiplier: 1 },
+  { key: "8avos", label: "8avos", multiplier: 2 },
+  { key: "4tos", label: "4tos", multiplier: 3 },
+  { key: "semis", label: "Semis", multiplier: 4 },
+  { key: "final", label: "Final", multiplier: 5 },
+  { key: "campeon", label: "Campeón", multiplier: 20 },
+];
+
 export default function ScoreboardView({ grupos }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -58,7 +67,12 @@ export default function ScoreboardView({ grupos }) {
                 <th className="px-4 py-3 text-center">Bota de oro</th>
                 <th className="px-4 py-3 text-center">Balón de oro</th>
                 <th className="px-4 py-3 text-center">Guante de oro</th>
-                <th className="px-4 py-3 text-center">PUNTOS TOTALES</th>
+                {KNOCKOUT_SCORE_COLUMNS.map((column) => (
+                  <th key={column.key} className="px-4 py-3 text-center">
+                    {column.label}
+                  </th>
+                ))}
+                <th className="px-4 py-3 text-center">TOTALES</th>
               </tr>
             </thead>
             <tbody>
@@ -93,12 +107,20 @@ export default function ScoreboardView({ grupos }) {
                       <span className="text-slate-500">-</span>
                     )}
                   </td>
+                  {KNOCKOUT_SCORE_COLUMNS.map((column) => (
+                    <td key={column.key} className="px-4 py-3 text-center font-black text-slate-100">
+                      {r.knockoutHits?.[column.key] ?? 0}{" "}
+                      <span className="text-xs font-semibold text-slate-500">
+                        (x{column.multiplier})
+                      </span>
+                    </td>
+                  ))}
                   <td className="px-4 py-3 text-center font-black text-blue-200">{r.points}</td>
                 </tr>
               ))}
               {!loading && !(data?.rows?.length) ? (
                 <tr>
-                  <td className="px-4 py-6 text-sm text-slate-300" colSpan={8}>
+                  <td className="px-4 py-6 text-sm text-slate-300" colSpan={14}>
                     No hay datos (aún no hay resultados reales o no hay usuarios).
                   </td>
                 </tr>

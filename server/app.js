@@ -558,12 +558,12 @@ function normalizeMvpPick(pick) {
 }
 
 const KNOCKOUT_PICK_ROUNDS = [
-  { key: "16avos", limit: 32, previousKey: null },
-  { key: "8avos", limit: 16, previousKey: "16avos" },
-  { key: "4tos", limit: 8, previousKey: "8avos" },
-  { key: "semis", limit: 4, previousKey: "4tos" },
-  { key: "final", limit: 2, previousKey: "semis" },
-  { key: "campeon", limit: 1, previousKey: "final" },
+  { key: "16avos", limit: 32, previousKey: null, points: 1 },
+  { key: "8avos", limit: 16, previousKey: "16avos", points: 2 },
+  { key: "4tos", limit: 8, previousKey: "8avos", points: 3 },
+  { key: "semis", limit: 4, previousKey: "4tos", points: 4 },
+  { key: "final", limit: 2, previousKey: "semis", points: 5 },
+  { key: "campeon", limit: 1, previousKey: "final", points: 20 },
 ];
 
 function normalizeKnockoutPicks(picks) {
@@ -608,8 +608,13 @@ app.get("/api/knockout-picks/me", async (req, res) => {
 
 app.put("/api/knockout-picks/me", async (req, res) => {
   if (!requireAuth(req, res)) return;
-  if (await getPredictionsLocked()) {
+  const isAdminUser = req.user?.role === "admin";
+  if (!isAdminUser && (await getPredictionsLocked())) {
     res.status(409).json({ error: "predictions_locked" });
+    return;
+  }
+  if (isAdminUser && (await getResultsLocked())) {
+    res.status(409).json({ error: "results_locked" });
     return;
   }
   const email = req.user.email;
@@ -1106,6 +1111,37 @@ async function computeScoreboard(groupId = null) {
     predsByUser.get(email).set(r.match_id, { local: r.local, visitante: r.visitante });
   }
 
+  const adminKnockoutRow = await dbGet(
+    db,
+    "SELECT picks_json FROM knockout_picks WHERE email = ?",
+    [ADMIN_EMAIL],
+  );
+  const adminKnockoutRaw = adminKnockoutRow?.picks_json ?? null;
+  const adminKnockoutParsed =
+    adminKnockoutRaw && typeof adminKnockoutRaw === "string"
+      ? jsonOrNull(adminKnockoutRaw)
+      : adminKnockoutRaw && typeof adminKnockoutRaw === "object"
+        ? adminKnockoutRaw
+        : null;
+  const officialKnockoutPicks = normalizeKnockoutPicks(adminKnockoutParsed);
+
+  const knockoutPickRows = userEmailSet.size
+    ? await dbAll(
+        db,
+        `SELECT email, picks_json FROM knockout_picks WHERE email IN (${userEmails
+          .map(() => "?")
+          .join(",")})`,
+        userEmails,
+      )
+    : [];
+  const knockoutPickByEmail = new Map();
+  for (const r of knockoutPickRows ?? []) {
+    const raw = r?.picks_json ?? null;
+    const parsed =
+      raw && typeof raw === "string" ? jsonOrNull(raw) : raw && typeof raw === "object" ? raw : null;
+    knockoutPickByEmail.set(r.email, normalizeKnockoutPicks(parsed));
+  }
+
   const [goleadoresResultRow, mvpResultRow, zamoraResultRow] = await Promise.all([
     dbGet(db, "SELECT picks_json FROM goleadores_result WHERE id = 1", []),
     dbGet(db, "SELECT pick_json FROM mvp_result WHERE id = 1", []),
@@ -1212,6 +1248,20 @@ async function computeScoreboard(groupId = null) {
     let botaDeOroPoints = 0;
     let balonDeOroPoints = 0;
     let guanteDeOroPoints = 0;
+    const knockoutHits = Object.fromEntries(KNOCKOUT_PICK_ROUNDS.map((round) => [round.key, 0]));
+    const knockoutPoints = Object.fromEntries(KNOCKOUT_PICK_ROUNDS.map((round) => [round.key, 0]));
+    const userKnockoutPicks = knockoutPickByEmail.get(u.email) ?? normalizeKnockoutPicks(null);
+
+    for (const round of KNOCKOUT_PICK_ROUNDS) {
+      const officialTeams = new Set(officialKnockoutPicks[round.key] ?? []);
+      if (!officialTeams.size) continue;
+      const hits = (userKnockoutPicks[round.key] ?? []).filter((teamId) =>
+        officialTeams.has(teamId),
+      ).length;
+      knockoutHits[round.key] = hits;
+      knockoutPoints[round.key] = hits * round.points;
+      points += knockoutPoints[round.key];
+    }
 
     const goleadorWinner = goleadoresResult?.[0] ?? { team: "", player: "" };
     const userGoleadores = goleadoresPickByEmail.get(u.email) ?? [];
@@ -1256,6 +1306,8 @@ async function computeScoreboard(groupId = null) {
       botaDeOroPoints,
       balonDeOroPoints,
       guanteDeOroPoints,
+      knockoutHits,
+      knockoutPoints,
       points,
     };
   });

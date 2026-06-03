@@ -34,6 +34,7 @@ export default function Sidebar({
 
   const isKnockoutResults =
     activeView === "fase-grupos" ||
+    activeView === "eliminatorias" ||
     activeView === "dieciseisavos" ||
     activeView === "octavos" ||
     activeView === "cuartos" ||
@@ -63,6 +64,7 @@ export default function Sidebar({
   const knockoutItems = useMemo(
     () => [
       { id: "fase-grupos", label: "Fase de grupos" },
+      { id: "eliminatorias", label: "Eliminatorias" },
     ],
     [],
   );

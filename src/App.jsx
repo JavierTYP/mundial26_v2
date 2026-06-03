@@ -450,6 +450,13 @@ export default function App() {
         if (me.user.role === "admin") {
           const u = await apiAdminUsers();
           if (!cancelled) setUsers(u.users ?? []);
+          const ko = await apiGetMyKnockoutPicks();
+          if (!cancelled) {
+            const normalizedKo = normalizeKnockoutPicks(ko?.picks);
+            setKnockoutPicks(normalizedKo);
+            setSavedKnockoutPicks(normalizedKo);
+            setKnockoutPicksUpdatedAt(ko?.updatedAt ?? null);
+          }
         } else {
           const [p, ko] = await Promise.all([
             apiGetMyPredictions(),
@@ -647,12 +654,15 @@ export default function App() {
 
   function updateKnockoutPickDraft(roundKey, teamId, selected) {
     if (!user?.email) return;
-    if (isAdmin) return;
-    if (predictionsLocked) {
+    if (!isAdmin && predictionsLocked) {
       setNotification({
         tone: "error",
         message: "Pronosticos bloqueados por el administrador.",
       });
+      return;
+    }
+    if (isAdmin && resultsLocked) {
+      setNotification({ tone: "error", message: "Resultados bloqueados por el administrador." });
       return;
     }
 
@@ -661,12 +671,15 @@ export default function App() {
 
   async function saveKnockoutPicks() {
     if (!user?.email) return;
-    if (isAdmin) return;
-    if (predictionsLocked) {
+    if (!isAdmin && predictionsLocked) {
       setNotification({
         tone: "error",
         message: "Pronosticos bloqueados por el administrador.",
       });
+      return;
+    }
+    if (isAdmin && resultsLocked) {
+      setNotification({ tone: "error", message: "Resultados bloqueados por el administrador." });
       return;
     }
 
@@ -683,11 +696,16 @@ export default function App() {
       if (e?.data?.error === "predictions_locked") {
         setPredictionsLocked(true);
       }
+      if (e?.data?.error === "results_locked") {
+        setResultsLocked(true);
+      }
       setNotification({
         tone: "error",
         message:
           e?.data?.error === "predictions_locked"
             ? "Pronosticos bloqueados."
+            : e?.data?.error === "results_locked"
+              ? "Resultados bloqueados."
             : "Error al guardar eliminatorias.",
       });
     } finally {
@@ -992,6 +1010,14 @@ export default function App() {
             if (nextUser?.role === "admin") {
               void apiAdminUsers()
                 .then((u) => setUsers(u.users ?? []))
+                .catch(() => {});
+              void apiGetMyKnockoutPicks()
+                .then((ko) => {
+                  const normalizedKo = normalizeKnockoutPicks(ko?.picks);
+                  setKnockoutPicks(normalizedKo);
+                  setSavedKnockoutPicks(normalizedKo);
+                  setKnockoutPicksUpdatedAt(ko?.updatedAt ?? null);
+                })
                 .catch(() => {});
             } else {
               void Promise.all([apiGetMyPredictions(), apiGetMyKnockoutPicks()])
@@ -1321,7 +1347,12 @@ export default function App() {
 
           {activeView === "resumen" ? (
             <ErrorBoundary>
-              <ResumenView torneo={state} predictionsByMatchId={predictionsByMatchId} />
+              <ResumenView
+                torneo={state}
+                predictionsByMatchId={predictionsByMatchId}
+                knockoutPicks={knockoutPicks}
+                userEmail={user?.email}
+              />
             </ErrorBoundary>
           ) : null}
 
@@ -1364,7 +1395,7 @@ export default function App() {
               grupos={state.grupos}
               knockoutPicks={knockoutPicks}
               standingsPredictionsByMatchId={standingsPredictionsByMatchId}
-              predictionsLocked={predictionsLocked}
+              predictionsLocked={isAdmin ? resultsLocked : predictionsLocked}
               onToggleAdvancement={updateKnockoutPickDraft}
               onSave={saveKnockoutPicks}
               isDirty={knockoutPicksDirty}
