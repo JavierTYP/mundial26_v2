@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 38">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #060808;
+      }
+
+      .cls-2 {
+        fill: #ffdc0a;
+      }
+
+      .cls-3 {
+        fill: #e52522;
+      }
+    </style>
+  </defs>
+  <g id="black_stripe" data-name="black stripe">
+    <g id="black_stripe-2" data-name="black stripe">
+      <rect class="cls-1" x="-1.25" y="-.5" width="58.5" height="39"/>
+    </g>
+  </g>
+  <rect id="red_stripe" data-name="red stripe" class="cls-3" x="-1.25" y="12.5" width="58.5" height="26"/>
+  <rect id="gold_stripe" data-name="gold stripe" class="cls-2" x="-1.25" y="25.5" width="58.5" height="13"/>
+</svg>

@@ -1,0 +1,1215 @@
+# Estructura de Datos JSON - Simulador Mundial 2026
+
+## Archivo: `data/mundial2026.json`
+
+```json
+{
+  "torneo": {
+    "nombre": "FIFA World Cup 2026",
+    "edicion": "XXIII",
+    "fechaInicio": "2026-06-12",
+    "fechaFinal": "2026-07-19",
+    "sedes": ["USA", "Canada", "Mexico"]
+  },
+  "grupos": {
+    "A": {
+      "id": "A",
+      "nombre": "Grupo A",
+      "equipos": [
+        {
+          "id": "uru",
+          "nombre": "Uruguay",
+          "codigo": "URU",
+          "bandera": "🇺🇾",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "arg",
+          "nombre": "Argentina",
+          "codigo": "ARG",
+          "bandera": "🇦🇷",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "mar",
+          "nombre": "Marruecos",
+          "codigo": "MAR",
+          "bandera": "🇲🇦",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "pan",
+          "nombre": "Panamá",
+          "codigo": "PAN",
+          "bandera": "🇵🇦",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": [
+        {
+          "id": "A1",
+          "matchday": 1,
+          "idLocal": "uru",
+          "idVisitante": "arg",
+          "fecha": "2026-06-12T14:00:00Z",
+          "ciudad": "New York",
+          "estadio": "MetLife Stadium",
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "A2",
+          "matchday": 1,
+          "idLocal": "mar",
+          "idVisitante": "pan",
+          "fecha": "2026-06-12T18:00:00Z",
+          "ciudad": "Los Angeles",
+          "estadio": "SoFi Stadium",
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "A3",
+          "matchday": 2,
+          "idLocal": "uru",
+          "idVisitante": "mar",
+          "fecha": "2026-06-17T14:00:00Z",
+          "ciudad": "Chicago",
+          "estadio": "Soldier Field",
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "A4",
+          "matchday": 2,
+          "idLocal": "arg",
+          "idVisitante": "pan",
+          "fecha": "2026-06-17T18:00:00Z",
+          "ciudad": "Dallas",
+          "estadio": "Cotton Bowl",
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "A5",
+          "matchday": 3,
+          "idLocal": "uru",
+          "idVisitante": "pan",
+          "fecha": "2026-06-21T20:00:00Z",
+          "ciudad": "Miami",
+          "estadio": "Hard Rock Stadium",
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "A6",
+          "matchday": 3,
+          "idLocal": "arg",
+          "idVisitante": "mar",
+          "fecha": "2026-06-21T20:00:00Z",
+          "ciudad": "Phoenix",
+          "estadio": "State Farm Stadium",
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        }
+      ]
+    },
+    "B": {
+      "id": "B",
+      "nombre": "Grupo B",
+      "equipos": [
+        {
+          "id": "esp",
+          "nombre": "España",
+          "codigo": "ESP",
+          "bandera": "🇪🇸",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "ale",
+          "nombre": "Alemania",
+          "codigo": "ALE",
+          "bandera": "🇩🇪",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "jap",
+          "nombre": "Japón",
+          "codigo": "JAP",
+          "bandera": "🇯🇵",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "cr",
+          "nombre": "Costa Rica",
+          "codigo": "CRC",
+          "bandera": "🇨🇷",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": []
+    },
+    "C": {
+      "id": "C",
+      "nombre": "Grupo C",
+      "equipos": [
+        {
+          "id": "hol",
+          "nombre": "Holanda",
+          "codigo": "NLD",
+          "bandera": "🇳🇱",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "sen",
+          "nombre": "Senegal",
+          "codigo": "SEN",
+          "bandera": "🇸🇳",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "ecu",
+          "nombre": "Ecuador",
+          "codigo": "ECU",
+          "bandera": "🇪🇨",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "qat",
+          "nombre": "Qatar",
+          "codigo": "QAT",
+          "bandera": "🇶🇦",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": []
+    },
+    "D": {
+      "id": "D",
+      "nombre": "Grupo D",
+      "equipos": [
+        {
+          "id": "fra",
+          "nombre": "Francia",
+          "codigo": "FRA",
+          "bandera": "🇫🇷",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "din",
+          "nombre": "Dinamarca",
+          "codigo": "DNK",
+          "bandera": "🇩🇰",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "per",
+          "nombre": "Perú",
+          "codigo": "PER",
+          "bandera": "🇵🇪",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "aus",
+          "nombre": "Australia",
+          "codigo": "AUS",
+          "bandera": "🇦🇺",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": []
+    },
+    "E": {
+      "id": "E",
+      "nombre": "Grupo E",
+      "equipos": [
+        {
+          "id": "bra",
+          "nombre": "Brasil",
+          "codigo": "BRA",
+          "bandera": "🇧🇷",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "sui",
+          "nombre": "Suiza",
+          "codigo": "CHE",
+          "bandera": "🇨🇭",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "cam",
+          "nombre": "Camerún",
+          "codigo": "CMR",
+          "bandera": "🇨🇲",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "can",
+          "nombre": "Canadá",
+          "codigo": "CAN",
+          "bandera": "🇨🇦",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": []
+    },
+    "F": {
+      "id": "F",
+      "nombre": "Grupo F",
+      "equipos": [
+        {
+          "id": "mex",
+          "nombre": "México",
+          "codigo": "MEX",
+          "bandera": "🇲🇽",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "por",
+          "nombre": "Portugal",
+          "codigo": "POR",
+          "bandera": "🇵🇹",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "pol",
+          "nombre": "Polonia",
+          "codigo": "POL",
+          "bandera": "🇵🇱",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "bel",
+          "nombre": "Bélgica",
+          "codigo": "BEL",
+          "bandera": "🇧🇪",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": []
+    },
+    "G": {
+      "id": "G",
+      "nombre": "Grupo G",
+      "equipos": [
+        {
+          "id": "col",
+          "nombre": "Colombia",
+          "codigo": "COL",
+          "bandera": "🇨🇴",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "par",
+          "nombre": "Paraguay",
+          "codigo": "PRY",
+          "bandera": "🇵🇾",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "ngr",
+          "nombre": "Nigeria",
+          "codigo": "NGA",
+          "bandera": "🇳🇬",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "tan",
+          "nombre": "Tanzania",
+          "codigo": "TZA",
+          "bandera": "🇹🇿",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": []
+    },
+    "H": {
+      "id": "H",
+      "nombre": "Grupo H",
+      "equipos": [
+        {
+          "id": "ira",
+          "nombre": "Irán",
+          "codigo": "IRN",
+          "bandera": "🇮🇷",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "tur",
+          "nombre": "Turquía",
+          "codigo": "TUR",
+          "bandera": "🇹🇷",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "ita",
+          "nombre": "Italia",
+          "codigo": "ITA",
+          "bandera": "🇮🇹",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "ang",
+          "nombre": "Angola",
+          "codigo": "AGO",
+          "bandera": "🇦🇴",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": []
+    },
+    "I": {
+      "id": "I",
+      "nombre": "Grupo I",
+      "equipos": [
+        {
+          "id": "bol",
+          "nombre": "Bolivia",
+          "codigo": "BOL",
+          "bandera": "🇧🇴",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "chi",
+          "nombre": "Chile",
+          "codigo": "CHI",
+          "bandera": "🇨🇱",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "par",
+          "nombre": "Paraguay",
+          "codigo": "PRY",
+          "bandera": "🇵🇾",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "vrg",
+          "nombre": "Islas Vírgenes",
+          "codigo": "VGB",
+          "bandera": "🇻🇬",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": []
+    },
+    "J": {
+      "id": "J",
+      "nombre": "Grupo J",
+      "equipos": [
+        {
+          "id": "wal",
+          "nombre": "Gales",
+          "codigo": "WAL",
+          "bandera": "🏴󠁧󠁢󠁷󠁬󠁳󠁿",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "tai",
+          "nombre": "Tailandia",
+          "codigo": "THA",
+          "bandera": "🇹🇭",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "vit",
+          "nombre": "Vietnam",
+          "codigo": "VNM",
+          "bandera": "🇻🇳",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "lbn",
+          "nombre": "Líbano",
+          "codigo": "LBN",
+          "bandera": "🇱🇧",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": []
+    },
+    "K": {
+      "id": "K",
+      "nombre": "Grupo K",
+      "equipos": [
+        {
+          "id": "nor",
+          "nombre": "Noruega",
+          "codigo": "NOR",
+          "bandera": "🇳🇴",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "ser",
+          "nombre": "Serbia",
+          "codigo": "SRB",
+          "bandera": "🇷🇸",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "slo",
+          "nombre": "Eslovaquia",
+          "codigo": "SVK",
+          "bandera": "🇸🇰",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "gre",
+          "nombre": "Grecia",
+          "codigo": "GRC",
+          "bandera": "🇬🇷",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": []
+    },
+    "L": {
+      "id": "L",
+      "nombre": "Grupo L",
+      "equipos": [
+        {
+          "id": "saf",
+          "nombre": "Sudáfrica",
+          "codigo": "ZAF",
+          "bandera": "🇿🇦",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "irl",
+          "nombre": "Irlanda",
+          "codigo": "IRL",
+          "bandera": "🇮🇪",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "uci",
+          "nombre": "Islandia",
+          "codigo": "ISL",
+          "bandera": "🇮🇸",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "uzb",
+          "nombre": "Uzbekistán",
+          "codigo": "UZB",
+          "bandera": "🇺🇿",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": []
+    }
+  },
+  "clasificados": {
+    "A": {
+      "primero": null,
+      "segundo": null
+    },
+    "B": {
+      "primero": null,
+      "segundo": null
+    },
+    "C": {
+      "primero": null,
+      "segundo": null
+    },
+    "D": {
+      "primero": null,
+      "segundo": null
+    },
+    "E": {
+      "primero": null,
+      "segundo": null
+    },
+    "F": {
+      "primero": null,
+      "segundo": null
+    },
+    "G": {
+      "primero": null,
+      "segundo": null
+    },
+    "H": {
+      "primero": null,
+      "segundo": null
+    },
+    "I": {
+      "primero": null,
+      "segundo": null
+    },
+    "J": {
+      "primero": null,
+      "segundo": null
+    },
+    "K": {
+      "primero": null,
+      "segundo": null
+    },
+    "L": {
+      "primero": null,
+      "segundo": null
+    }
+  },
+  "octavos": [
+    {
+      "id": "O1",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1A vs 2B",
+      "fecha": "2026-07-01"
+    },
+    {
+      "id": "O2",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1B vs 2A",
+      "fecha": "2026-07-01"
+    },
+    {
+      "id": "O3",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1C vs 2D",
+      "fecha": "2026-07-02"
+    },
+    {
+      "id": "O4",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1D vs 2C",
+      "fecha": "2026-07-02"
+    },
+    {
+      "id": "O5",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1E vs 2F",
+      "fecha": "2026-07-03"
+    },
+    {
+      "id": "O6",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1F vs 2E",
+      "fecha": "2026-07-03"
+    },
+    {
+      "id": "O7",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1G vs 2H",
+      "fecha": "2026-07-04"
+    },
+    {
+      "id": "O8",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1H vs 2G",
+      "fecha": "2026-07-04"
+    },
+    {
+      "id": "O9",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1I vs 2J",
+      "fecha": "2026-07-05"
+    },
+    {
+      "id": "O10",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1J vs 2I",
+      "fecha": "2026-07-05"
+    },
+    {
+      "id": "O11",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1K vs 2L",
+      "fecha": "2026-07-06"
+    },
+    {
+      "id": "O12",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1L vs 2K",
+      "fecha": "2026-07-06"
+    }
+  ],
+  "cuartos": [
+    {
+      "id": "C1",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "O1 vs O2",
+      "fecha": "2026-07-09"
+    },
+    {
+      "id": "C2",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "O3 vs O4",
+      "fecha": "2026-07-09"
+    },
+    {
+      "id": "C3",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "O5 vs O6",
+      "fecha": "2026-07-10"
+    },
+    {
+      "id": "C4",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "O7 vs O8",
+      "fecha": "2026-07-10"
+    },
+    {
+      "id": "C5",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "O9 vs O10",
+      "fecha": "2026-07-11"
+    },
+    {
+      "id": "C6",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "O11 vs O12",
+      "fecha": "2026-07-11"
+    }
+  ],
+  "semifinales": [
+    {
+      "id": "S1",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "C1 vs C2",
+      "fecha": "2026-07-14"
+    },
+    {
+      "id": "S2",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "C3 vs C4",
+      "fecha": "2026-07-15"
+    }
+  ],
+  "final": {
+    "id": "F",
+    "local": null,
+    "visitante": null,
+    "resultado": {
+      "local": null,
+      "visitante": null
+    },
+    "ganador": null,
+    "emparejamiento": "S1 vs S2",
+    "fecha": "2026-07-19"
+  },
+  "metadata": {
+    "ultimaActualizacion": null,
+    "estadoTorneo": "grupos",
+    "porcentajeCompletado": 0
+  }
+}
+```
+
+---
+
+## NOTAS IMPORTANTES
+
+- Los equipos exactos pueden cambiar hasta el sorteo oficial (junio 2025)
+- Este JSON es una **estructura base** que puede extenderse
+- Los `id` de equipos deben ser únicos y en minúsculas sin acentos
+- Las emojis de banderas funcionan en navegadores modernos pero pueden tener compatibilidad limitada en algunos navegadores old
+- Los emparejamientos de octavos siguen el patrón estándar FIFA
+
+---
+
+## Uso en React
+
+```javascript
+import mundial2026 from './data/mundial2026.json';
+
+const [torneo, setTorneo] = useState(mundial2026);
+
+// Actualizar resultado de un partido
+const actualizarResultado = (grupoId, partidoId, local, visitante) => {
+  setTorneo(prev => ({
+    ...prev,
+    grupos: {
+      ...prev.grupos,
+      [grupoId]: {
+        ...prev.grupos[grupoId],
+        partidos: prev.grupos[grupoId].partidos.map(p =>
+          p.id === partidoId
+            ? { ...p, resultado: { local, visitante }, jugado: true }
+            : p
+        )
+      }
+    }
+  }));
+};
+```

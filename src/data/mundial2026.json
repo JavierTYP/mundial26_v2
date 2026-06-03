@@ -1,0 +1,2202 @@
+{
+  "torneo": {
+    "nombre": "FIFA World Cup 2026",
+    "edicion": "XXIII",
+    "fechaInicio": "2026-06-12",
+    "fechaFinal": "2026-07-19",
+    "sedes": [
+      "USA",
+      "Canada",
+      "Mexico"
+    ]
+  },
+  "grupos": {
+    "A": {
+      "id": "A",
+      "nombre": "Grupo A",
+      "equipos": [
+        {
+          "id": "mexico",
+          "nombre": "México",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "sudafrica",
+          "nombre": "Sudáfrica",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "corea_del_sur",
+          "nombre": "Corea del Sur",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "republica_checa",
+          "nombre": "República Checa",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": [
+        {
+          "id": "FG-A1",
+          "matchday": 1,
+          "idLocal": "mexico",
+          "idVisitante": "sudafrica",
+          "fecha": "2026-06-11",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-A2",
+          "matchday": 1,
+          "idLocal": "corea_del_sur",
+          "idVisitante": "republica_checa",
+          "fecha": "2026-06-11",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-A3",
+          "matchday": 2,
+          "idLocal": "mexico",
+          "idVisitante": "corea_del_sur",
+          "fecha": "2026-06-18",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-A4",
+          "matchday": 2,
+          "idLocal": "sudafrica",
+          "idVisitante": "republica_checa",
+          "fecha": "2026-06-18",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-A5",
+          "matchday": 3,
+          "idLocal": "mexico",
+          "idVisitante": "republica_checa",
+          "fecha": "2026-06-24",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-A6",
+          "matchday": 3,
+          "idLocal": "sudafrica",
+          "idVisitante": "corea_del_sur",
+          "fecha": "2026-06-24",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        }
+      ]
+    },
+    "B": {
+      "id": "B",
+      "nombre": "Grupo B",
+      "equipos": [
+        {
+          "id": "canada",
+          "nombre": "Canadá",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "bosnia_y_herzegovina",
+          "nombre": "Bosnia y Herzegovina",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "qatar",
+          "nombre": "Qatar",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "suiza",
+          "nombre": "Suiza",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": [
+        {
+          "id": "FG-B1",
+          "matchday": 1,
+          "idLocal": "canada",
+          "idVisitante": "bosnia_y_herzegovina",
+          "fecha": "2026-06-12",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-B2",
+          "matchday": 1,
+          "idLocal": "qatar",
+          "idVisitante": "suiza",
+          "fecha": "2026-06-13",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-B3",
+          "matchday": 2,
+          "idLocal": "canada",
+          "idVisitante": "qatar",
+          "fecha": "2026-06-18",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-B4",
+          "matchday": 2,
+          "idLocal": "bosnia_y_herzegovina",
+          "idVisitante": "suiza",
+          "fecha": "2026-06-18",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-B5",
+          "matchday": 3,
+          "idLocal": "canada",
+          "idVisitante": "suiza",
+          "fecha": "2026-06-24",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-B6",
+          "matchday": 3,
+          "idLocal": "bosnia_y_herzegovina",
+          "idVisitante": "qatar",
+          "fecha": "2026-06-24",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        }
+      ]
+    },
+    "C": {
+      "id": "C",
+      "nombre": "Grupo C",
+      "equipos": [
+        {
+          "id": "brasil",
+          "nombre": "Brasil",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "marruecos",
+          "nombre": "Marruecos",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "haiti",
+          "nombre": "Haití",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "escocia",
+          "nombre": "Escocia",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": [
+        {
+          "id": "FG-C1",
+          "matchday": 1,
+          "idLocal": "brasil",
+          "idVisitante": "marruecos",
+          "fecha": "2026-06-13",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-C2",
+          "matchday": 1,
+          "idLocal": "haiti",
+          "idVisitante": "escocia",
+          "fecha": "2026-06-13",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-C3",
+          "matchday": 2,
+          "idLocal": "brasil",
+          "idVisitante": "haiti",
+          "fecha": "2026-06-19",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-C4",
+          "matchday": 2,
+          "idLocal": "marruecos",
+          "idVisitante": "escocia",
+          "fecha": "2026-06-19",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-C5",
+          "matchday": 3,
+          "idLocal": "brasil",
+          "idVisitante": "escocia",
+          "fecha": "2026-06-24",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-C6",
+          "matchday": 3,
+          "idLocal": "marruecos",
+          "idVisitante": "haiti",
+          "fecha": "2026-06-24",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        }
+      ]
+    },
+    "D": {
+      "id": "D",
+      "nombre": "Grupo D",
+      "equipos": [
+        {
+          "id": "estados_unidos",
+          "nombre": "Estados Unidos",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "paraguay",
+          "nombre": "Paraguay",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "australia",
+          "nombre": "Australia",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "turquia",
+          "nombre": "Turquía",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": [
+        {
+          "id": "FG-D1",
+          "matchday": 1,
+          "idLocal": "estados_unidos",
+          "idVisitante": "paraguay",
+          "fecha": "2026-06-12",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-D2",
+          "matchday": 1,
+          "idLocal": "australia",
+          "idVisitante": "turquia",
+          "fecha": "2026-06-13",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-D3",
+          "matchday": 2,
+          "idLocal": "estados_unidos",
+          "idVisitante": "australia",
+          "fecha": "2026-06-19",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-D4",
+          "matchday": 2,
+          "idLocal": "paraguay",
+          "idVisitante": "turquia",
+          "fecha": "2026-06-19",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-D5",
+          "matchday": 3,
+          "idLocal": "estados_unidos",
+          "idVisitante": "turquia",
+          "fecha": "2026-06-25",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-D6",
+          "matchday": 3,
+          "idLocal": "paraguay",
+          "idVisitante": "australia",
+          "fecha": "2026-06-25",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        }
+      ]
+    },
+    "E": {
+      "id": "E",
+      "nombre": "Grupo E",
+      "equipos": [
+        {
+          "id": "alemania",
+          "nombre": "Alemania",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "curazao",
+          "nombre": "Curazao",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "costa_de_marfil",
+          "nombre": "Costa de Marfil",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "ecuador",
+          "nombre": "Ecuador",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": [
+        {
+          "id": "FG-E1",
+          "matchday": 1,
+          "idLocal": "alemania",
+          "idVisitante": "curazao",
+          "fecha": "2026-06-14",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-E2",
+          "matchday": 1,
+          "idLocal": "costa_de_marfil",
+          "idVisitante": "ecuador",
+          "fecha": "2026-06-14",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-E3",
+          "matchday": 2,
+          "idLocal": "alemania",
+          "idVisitante": "costa_de_marfil",
+          "fecha": "2026-06-20",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-E4",
+          "matchday": 2,
+          "idLocal": "curazao",
+          "idVisitante": "ecuador",
+          "fecha": "2026-06-20",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-E5",
+          "matchday": 3,
+          "idLocal": "alemania",
+          "idVisitante": "ecuador",
+          "fecha": "2026-06-25",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-E6",
+          "matchday": 3,
+          "idLocal": "curazao",
+          "idVisitante": "costa_de_marfil",
+          "fecha": "2026-06-25",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        }
+      ]
+    },
+    "F": {
+      "id": "F",
+      "nombre": "Grupo F",
+      "equipos": [
+        {
+          "id": "paises_bajos",
+          "nombre": "Países Bajos",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "japon",
+          "nombre": "Japón",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "suecia",
+          "nombre": "Suecia",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "tunez",
+          "nombre": "Túnez",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": [
+        {
+          "id": "FG-F1",
+          "matchday": 1,
+          "idLocal": "paises_bajos",
+          "idVisitante": "japon",
+          "fecha": "2026-06-14",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-F2",
+          "matchday": 1,
+          "idLocal": "suecia",
+          "idVisitante": "tunez",
+          "fecha": "2026-06-14",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-F3",
+          "matchday": 2,
+          "idLocal": "paises_bajos",
+          "idVisitante": "suecia",
+          "fecha": "2026-06-20",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-F4",
+          "matchday": 2,
+          "idLocal": "japon",
+          "idVisitante": "tunez",
+          "fecha": "2026-06-20",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-F5",
+          "matchday": 3,
+          "idLocal": "paises_bajos",
+          "idVisitante": "tunez",
+          "fecha": "2026-06-25",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-F6",
+          "matchday": 3,
+          "idLocal": "japon",
+          "idVisitante": "suecia",
+          "fecha": "2026-06-25",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        }
+      ]
+    },
+    "G": {
+      "id": "G",
+      "nombre": "Grupo G",
+      "equipos": [
+        {
+          "id": "belgica",
+          "nombre": "Bélgica",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "egipto",
+          "nombre": "Egipto",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "iran",
+          "nombre": "Irán",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "nueva_zelanda",
+          "nombre": "Nueva Zelanda",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": [
+        {
+          "id": "FG-G1",
+          "matchday": 1,
+          "idLocal": "belgica",
+          "idVisitante": "egipto",
+          "fecha": "2026-06-15",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-G2",
+          "matchday": 1,
+          "idLocal": "iran",
+          "idVisitante": "nueva_zelanda",
+          "fecha": "2026-06-15",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-G3",
+          "matchday": 2,
+          "idLocal": "belgica",
+          "idVisitante": "iran",
+          "fecha": "2026-06-21",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-G4",
+          "matchday": 2,
+          "idLocal": "egipto",
+          "idVisitante": "nueva_zelanda",
+          "fecha": "2026-06-21",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-G5",
+          "matchday": 3,
+          "idLocal": "belgica",
+          "idVisitante": "nueva_zelanda",
+          "fecha": "2026-06-26",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-G6",
+          "matchday": 3,
+          "idLocal": "egipto",
+          "idVisitante": "iran",
+          "fecha": "2026-06-26",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        }
+      ]
+    },
+    "H": {
+      "id": "H",
+      "nombre": "Grupo H",
+      "equipos": [
+        {
+          "id": "espana",
+          "nombre": "España",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "cabo_verde",
+          "nombre": "Cabo Verde",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "arabia_saudita",
+          "nombre": "Arabia Saudita",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "uruguay",
+          "nombre": "Uruguay",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": [
+        {
+          "id": "FG-H1",
+          "matchday": 1,
+          "idLocal": "espana",
+          "idVisitante": "cabo_verde",
+          "fecha": "2026-06-15",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-H2",
+          "matchday": 1,
+          "idLocal": "arabia_saudita",
+          "idVisitante": "uruguay",
+          "fecha": "2026-06-15",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-H3",
+          "matchday": 2,
+          "idLocal": "espana",
+          "idVisitante": "arabia_saudita",
+          "fecha": "2026-06-21",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-H4",
+          "matchday": 2,
+          "idLocal": "cabo_verde",
+          "idVisitante": "uruguay",
+          "fecha": "2026-06-21",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-H5",
+          "matchday": 3,
+          "idLocal": "espana",
+          "idVisitante": "uruguay",
+          "fecha": "2026-06-26",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-H6",
+          "matchday": 3,
+          "idLocal": "cabo_verde",
+          "idVisitante": "arabia_saudita",
+          "fecha": "2026-06-26",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        }
+      ]
+    },
+    "I": {
+      "id": "I",
+      "nombre": "Grupo I",
+      "equipos": [
+        {
+          "id": "francia",
+          "nombre": "Francia",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "senegal",
+          "nombre": "Senegal",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "irak",
+          "nombre": "Irak",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "noruega",
+          "nombre": "Noruega",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": [
+        {
+          "id": "FG-I1",
+          "matchday": 1,
+          "idLocal": "francia",
+          "idVisitante": "senegal",
+          "fecha": "2026-06-16",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-I2",
+          "matchday": 1,
+          "idLocal": "irak",
+          "idVisitante": "noruega",
+          "fecha": "2026-06-16",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-I3",
+          "matchday": 2,
+          "idLocal": "francia",
+          "idVisitante": "irak",
+          "fecha": "2026-06-22",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-I4",
+          "matchday": 2,
+          "idLocal": "senegal",
+          "idVisitante": "noruega",
+          "fecha": "2026-06-22",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-I5",
+          "matchday": 3,
+          "idLocal": "francia",
+          "idVisitante": "noruega",
+          "fecha": "2026-06-26",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-I6",
+          "matchday": 3,
+          "idLocal": "senegal",
+          "idVisitante": "irak",
+          "fecha": "2026-06-26",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        }
+      ]
+    },
+    "J": {
+      "id": "J",
+      "nombre": "Grupo J",
+      "equipos": [
+        {
+          "id": "argentina",
+          "nombre": "Argentina",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "argelia",
+          "nombre": "Argelia",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "austria",
+          "nombre": "Austria",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "jordania",
+          "nombre": "Jordania",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": [
+        {
+          "id": "FG-J1",
+          "matchday": 1,
+          "idLocal": "argentina",
+          "idVisitante": "argelia",
+          "fecha": "2026-06-16",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-J2",
+          "matchday": 1,
+          "idLocal": "austria",
+          "idVisitante": "jordania",
+          "fecha": "2026-06-16",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-J3",
+          "matchday": 2,
+          "idLocal": "argentina",
+          "idVisitante": "austria",
+          "fecha": "2026-06-22",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-J4",
+          "matchday": 2,
+          "idLocal": "argelia",
+          "idVisitante": "jordania",
+          "fecha": "2026-06-22",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-J5",
+          "matchday": 3,
+          "idLocal": "argentina",
+          "idVisitante": "jordania",
+          "fecha": "2026-06-27",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-J6",
+          "matchday": 3,
+          "idLocal": "argelia",
+          "idVisitante": "austria",
+          "fecha": "2026-06-27",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        }
+      ]
+    },
+    "K": {
+      "id": "K",
+      "nombre": "Grupo K",
+      "equipos": [
+        {
+          "id": "portugal",
+          "nombre": "Portugal",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "rd_congo",
+          "nombre": "RD Congo",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "uzbekistan",
+          "nombre": "Uzbekistán",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "colombia",
+          "nombre": "Colombia",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": [
+        {
+          "id": "FG-K1",
+          "matchday": 1,
+          "idLocal": "portugal",
+          "idVisitante": "rd_congo",
+          "fecha": "2026-06-17",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-K2",
+          "matchday": 1,
+          "idLocal": "uzbekistan",
+          "idVisitante": "colombia",
+          "fecha": "2026-06-17",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-K3",
+          "matchday": 2,
+          "idLocal": "portugal",
+          "idVisitante": "uzbekistan",
+          "fecha": "2026-06-23",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-K4",
+          "matchday": 2,
+          "idLocal": "rd_congo",
+          "idVisitante": "colombia",
+          "fecha": "2026-06-23",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-K5",
+          "matchday": 3,
+          "idLocal": "portugal",
+          "idVisitante": "colombia",
+          "fecha": "2026-06-27",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-K6",
+          "matchday": 3,
+          "idLocal": "rd_congo",
+          "idVisitante": "uzbekistan",
+          "fecha": "2026-06-27",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        }
+      ]
+    },
+    "L": {
+      "id": "L",
+      "nombre": "Grupo L",
+      "equipos": [
+        {
+          "id": "inglaterra",
+          "nombre": "Inglaterra",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "croacia",
+          "nombre": "Croacia",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "ghana",
+          "nombre": "Ghana",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        },
+        {
+          "id": "panama",
+          "nombre": "Panamá",
+          "pj": 0,
+          "g": 0,
+          "e": 0,
+          "p": 0,
+          "gf": 0,
+          "gc": 0,
+          "dg": 0,
+          "pts": 0
+        }
+      ],
+      "partidos": [
+        {
+          "id": "FG-L1",
+          "matchday": 1,
+          "idLocal": "inglaterra",
+          "idVisitante": "croacia",
+          "fecha": "2026-06-17",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-L2",
+          "matchday": 1,
+          "idLocal": "ghana",
+          "idVisitante": "panama",
+          "fecha": "2026-06-17",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-L3",
+          "matchday": 2,
+          "idLocal": "inglaterra",
+          "idVisitante": "ghana",
+          "fecha": "2026-06-23",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-L4",
+          "matchday": 2,
+          "idLocal": "croacia",
+          "idVisitante": "panama",
+          "fecha": "2026-06-23",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-L5",
+          "matchday": 3,
+          "idLocal": "inglaterra",
+          "idVisitante": "panama",
+          "fecha": "2026-06-27",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        },
+        {
+          "id": "FG-L6",
+          "matchday": 3,
+          "idLocal": "croacia",
+          "idVisitante": "ghana",
+          "fecha": "2026-06-27",
+          "ciudad": null,
+          "estadio": null,
+          "resultado": {
+            "local": null,
+            "visitante": null
+          },
+          "confirmado": false,
+          "jugado": false
+        }
+      ]
+    }
+  },
+  "clasificados": {
+    "A": {
+      "primero": null,
+      "segundo": null
+    },
+    "B": {
+      "primero": null,
+      "segundo": null
+    },
+    "C": {
+      "primero": null,
+      "segundo": null
+    },
+    "D": {
+      "primero": null,
+      "segundo": null
+    },
+    "E": {
+      "primero": null,
+      "segundo": null
+    },
+    "F": {
+      "primero": null,
+      "segundo": null
+    },
+    "G": {
+      "primero": null,
+      "segundo": null
+    },
+    "H": {
+      "primero": null,
+      "segundo": null
+    },
+    "I": {
+      "primero": null,
+      "segundo": null
+    },
+    "J": {
+      "primero": null,
+      "segundo": null
+    },
+    "K": {
+      "primero": null,
+      "segundo": null
+    },
+    "L": {
+      "primero": null,
+      "segundo": null
+    }
+  },
+  "dieciseisavos": [
+    {
+      "id": "16-D1",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1E vs 3ABCDF",
+      "fecha": "2026-06-29"
+    },
+    {
+      "id": "16-D2",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1I vs 3CDFGH",
+      "fecha": "2026-06-30"
+    },
+    {
+      "id": "16-D3",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "2A vs 2B",
+      "fecha": "2026-06-28"
+    },
+    {
+      "id": "16-D4",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1F vs 2C",
+      "fecha": "2026-06-30"
+    },
+    {
+      "id": "16-D5",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "2K vs 2L",
+      "fecha": "2026-07-03"
+    },
+    {
+      "id": "16-D6",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1H vs 2J",
+      "fecha": "2026-07-02"
+    },
+    {
+      "id": "16-D7",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1D vs 3BEFIJ",
+      "fecha": "2026-07-03"
+    },
+    {
+      "id": "16-D8",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1G vs 3AEHIJ",
+      "fecha": "2026-07-02"
+    },
+    {
+      "id": "16-D9",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1C vs 2F",
+      "fecha": "2026-06-29"
+    },
+    {
+      "id": "16-D10",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "2E vs 2I",
+      "fecha": "2026-06-30"
+    },
+    {
+      "id": "16-D11",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1A vs 3CEFHI",
+      "fecha": "2026-07-01"
+    },
+    {
+      "id": "16-D12",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1L vs 3EHIJK",
+      "fecha": "2026-07-01"
+    },
+    {
+      "id": "16-D13",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1J vs 2H",
+      "fecha": "2026-07-03"
+    },
+    {
+      "id": "16-D14",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "2D vs 2G",
+      "fecha": "2026-07-03"
+    },
+    {
+      "id": "16-D15",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1B vs 3EFGIJ",
+      "fecha": "2026-07-02"
+    },
+    {
+      "id": "16-D16",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "1K vs 3DEIJL",
+      "fecha": "2026-07-03"
+    }
+  ],
+  "octavos": [
+    {
+      "id": "08-O1",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "16-D1 vs 16-D2",
+      "fecha": "2026-07-04"
+    },
+    {
+      "id": "08-O2",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "16-D3 vs 16-D4",
+      "fecha": "2026-07-04"
+    },
+    {
+      "id": "08-O3",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "16-D5 vs 16-D6",
+      "fecha": "2026-07-06"
+    },
+    {
+      "id": "08-O4",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "16-D7 vs 16-D8",
+      "fecha": "2026-07-06"
+    },
+    {
+      "id": "08-O5",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "16-D9 vs 16-D10",
+      "fecha": "2026-07-05"
+    },
+    {
+      "id": "08-O6",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "16-D11 vs 16-D12",
+      "fecha": "2026-07-05"
+    },
+    {
+      "id": "08-O7",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "16-D13 vs 16-D14",
+      "fecha": "2026-07-07"
+    },
+    {
+      "id": "08-O8",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "16-D15 vs 16-D16",
+      "fecha": "2026-07-07"
+    }
+  ],
+  "cuartos": [
+    {
+      "id": "04-C1",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "08-O1 vs 08-O2",
+      "fecha": "2026-07-09"
+    },
+    {
+      "id": "04-C2",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "08-O3 vs 08-O4",
+      "fecha": "2026-07-10"
+    },
+    {
+      "id": "04-C3",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "08-O5 vs 08-O6",
+      "fecha": "2026-07-11"
+    },
+    {
+      "id": "04-C4",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "08-O7 vs 08-O8",
+      "fecha": "2026-07-11"
+    }
+  ],
+  "semifinales": [
+    {
+      "id": "02-S1",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "04-C1 vs 04-C2",
+      "fecha": "2026-07-14"
+    },
+    {
+      "id": "02-S2",
+      "local": null,
+      "visitante": null,
+      "resultado": {
+        "local": null,
+        "visitante": null
+      },
+      "ganador": null,
+      "emparejamiento": "04-C3 vs 04-C4",
+      "fecha": "2026-07-15"
+    }
+  ],
+  "final": {
+    "id": "FI-F1",
+    "local": null,
+    "visitante": null,
+    "resultado": {
+      "local": null,
+      "visitante": null
+    },
+    "ganador": null,
+    "emparejamiento": "02-S1 vs 02-S2",
+    "fecha": "2026-07-19"
+  },
+  "metadata": {
+    "ultimaActualizacion": null,
+    "estadoTorneo": "grupos",
+    "porcentajeCompletado": 0
+  }
+}
