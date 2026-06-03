@@ -25,6 +25,7 @@ export default function Sidebar({
 }) {
   const isPredicciones =
     activeView === "pronosticos-grupos" ||
+    activeView === "eliminatorias" ||
     activeView === "pronosticos-dieciseisavos" ||
     activeView === "pronosticos-octavos" ||
     activeView === "pronosticos-cuartos" ||
@@ -45,11 +46,7 @@ export default function Sidebar({
   const pronosticosItems = useMemo(
     () => [
       { id: "pronosticos-grupos", label: "Fase de grupos" },
-      { id: "pronosticos-dieciseisavos", label: "16avos" },
-      { id: "pronosticos-octavos", label: "8avos" },
-      { id: "pronosticos-cuartos", label: "4tos" },
-      { id: "pronosticos-semifinal", label: "Semifinales" },
-      { id: "pronosticos-final", label: "Final" },
+      { id: "eliminatorias", label: "Eliminatorias" },
     ],
     [],
   );
@@ -66,11 +63,6 @@ export default function Sidebar({
   const knockoutItems = useMemo(
     () => [
       { id: "fase-grupos", label: "Fase de grupos" },
-      { id: "dieciseisavos", label: "16avos" },
-      { id: "octavos", label: "Octavos" },
-      { id: "cuartos", label: "Cuartos" },
-      { id: "semifinal", label: "Semifinal" },
-      { id: "final", label: "Final" },
     ],
     [],
   );

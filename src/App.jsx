@@ -28,6 +28,11 @@ import GoleadoresView from "./views/GoleadoresView.jsx";
 import ZamoraView from "./views/ZamoraView.jsx";
 import MvpView from "./views/MvpView.jsx";
 import PlayerView from "./views/PlayerView.jsx";
+import EliminatoriasView, {
+  createEmptyKnockoutPicks,
+  normalizeKnockoutPicks,
+  toggleKnockoutPick,
+} from "./views/EliminatoriasView.jsx";
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
 
 import { advanceRound, buildDieciseisavos, winnerId } from "./utils/knockout.js";
@@ -47,10 +52,12 @@ import {
   apiAdminSettings,
   apiAdminSetUserPaid,
   apiAdminUsers,
+  apiGetMyKnockoutPicks,
   apiGetMyPredictions,
   apiGetTournamentState,
   apiLogout,
   apiMe,
+  apiPutMyKnockoutPicks,
   apiPutMyPrediction,
   apiPutTournamentState,
 } from "./utils/api.js";
@@ -354,6 +361,10 @@ export default function App() {
   const [users, setUsers] = useState([]);
   const [predictionsByMatchId, setPredictionsByMatchId] = useState({});
   const [draftPredictionsByMatchId, setDraftPredictionsByMatchId] = useState({});
+  const [knockoutPicks, setKnockoutPicks] = useState(() => createEmptyKnockoutPicks());
+  const [savedKnockoutPicks, setSavedKnockoutPicks] = useState(() => createEmptyKnockoutPicks());
+  const [knockoutPicksUpdatedAt, setKnockoutPicksUpdatedAt] = useState(null);
+  const [knockoutPicksSaving, setKnockoutPicksSaving] = useState(false);
   const [predictionsLocked, setPredictionsLocked] = useState(false);
   const [resultsLocked, setResultsLocked] = useState(false);
 
@@ -440,11 +451,18 @@ export default function App() {
           const u = await apiAdminUsers();
           if (!cancelled) setUsers(u.users ?? []);
         } else {
-          const p = await apiGetMyPredictions();
+          const [p, ko] = await Promise.all([
+            apiGetMyPredictions(),
+            apiGetMyKnockoutPicks(),
+          ]);
           if (!cancelled) {
             setPredictionsByMatchId(migratePredictionKeys(p.predictions ?? {}));
             setDraftPredictionsByMatchId({});
             setPredictionsLocked(Boolean(p?.predictionsLocked));
+            const normalizedKo = normalizeKnockoutPicks(ko?.picks);
+            setKnockoutPicks(normalizedKo);
+            setSavedKnockoutPicks(normalizedKo);
+            setKnockoutPicksUpdatedAt(ko?.updatedAt ?? null);
           }
         }
       } catch {
@@ -626,9 +644,67 @@ export default function App() {
     });
   }
 
+
+  function updateKnockoutPickDraft(roundKey, teamId, selected) {
+    if (!user?.email) return;
+    if (isAdmin) return;
+    if (predictionsLocked) {
+      setNotification({
+        tone: "error",
+        message: "Pronosticos bloqueados por el administrador.",
+      });
+      return;
+    }
+
+    setKnockoutPicks((prev) => toggleKnockoutPick(prev, roundKey, teamId, selected));
+  }
+
+  async function saveKnockoutPicks() {
+    if (!user?.email) return;
+    if (isAdmin) return;
+    if (predictionsLocked) {
+      setNotification({
+        tone: "error",
+        message: "Pronosticos bloqueados por el administrador.",
+      });
+      return;
+    }
+
+    const normalized = normalizeKnockoutPicks(knockoutPicks);
+    setKnockoutPicksSaving(true);
+    try {
+      const r = await apiPutMyKnockoutPicks(normalized);
+      const saved = normalizeKnockoutPicks(r?.picks ?? normalized);
+      setKnockoutPicks(saved);
+      setSavedKnockoutPicks(saved);
+      setKnockoutPicksUpdatedAt(r?.updatedAt ?? new Date().toISOString());
+      setNotification({ tone: "success", message: "Eliminatorias guardadas." });
+    } catch (e) {
+      if (e?.data?.error === "predictions_locked") {
+        setPredictionsLocked(true);
+      }
+      setNotification({
+        tone: "error",
+        message:
+          e?.data?.error === "predictions_locked"
+            ? "Pronosticos bloqueados."
+            : "Error al guardar eliminatorias.",
+      });
+    } finally {
+      setKnockoutPicksSaving(false);
+    }
+  }
+
   const standingsPredictionsByMatchId = useMemo(() => {
     return { ...(predictionsByMatchId ?? {}), ...(draftPredictionsByMatchId ?? {}) };
   }, [draftPredictionsByMatchId, predictionsByMatchId]);
+
+  const knockoutPicksDirty = useMemo(() => {
+    return (
+      JSON.stringify(normalizeKnockoutPicks(knockoutPicks)) !==
+      JSON.stringify(normalizeKnockoutPicks(savedKnockoutPicks))
+    );
+  }, [knockoutPicks, savedKnockoutPicks]);
 
   const predictedKnockoutTorneo = useMemo(() => {
     return buildPredictedKnockoutTournament(state, standingsPredictionsByMatchId);
@@ -888,6 +964,11 @@ export default function App() {
             setActiveView("inicio");
             setPredictionsLocked(false);
             setPredictionsByMatchId({});
+            setDraftPredictionsByMatchId({});
+            setKnockoutPicks(createEmptyKnockoutPicks());
+            setSavedKnockoutPicks(createEmptyKnockoutPicks());
+            setKnockoutPicksUpdatedAt(null);
+            setKnockoutPicksSaving(false);
             setUsers([]);
             void apiMe()
               .then((me) => setPredictionsLocked(Boolean(me?.settings?.predictionsLocked)))
@@ -913,8 +994,14 @@ export default function App() {
                 .then((u) => setUsers(u.users ?? []))
                 .catch(() => {});
             } else {
-              void apiGetMyPredictions()
-                .then((p) => setPredictionsByMatchId(migratePredictionKeys(p.predictions ?? {})))
+              void Promise.all([apiGetMyPredictions(), apiGetMyKnockoutPicks()])
+                .then(([p, ko]) => {
+                  setPredictionsByMatchId(migratePredictionKeys(p.predictions ?? {}));
+                  const normalizedKo = normalizeKnockoutPicks(ko?.picks);
+                  setKnockoutPicks(normalizedKo);
+                  setSavedKnockoutPicks(normalizedKo);
+                  setKnockoutPicksUpdatedAt(ko?.updatedAt ?? null);
+                })
                 .catch(() => {});
             }
           }}
@@ -947,6 +1034,12 @@ export default function App() {
           setUser(null);
           setSidebarOpen(false);
           setActiveView("inicio");
+          setPredictionsByMatchId({});
+          setDraftPredictionsByMatchId({});
+          setKnockoutPicks(createEmptyKnockoutPicks());
+          setSavedKnockoutPicks(createEmptyKnockoutPicks());
+          setKnockoutPicksUpdatedAt(null);
+          setKnockoutPicksSaving(false);
           setNotification({ tone: "info", message: "Sesión cerrada." });
         }}
       />
@@ -1264,6 +1357,20 @@ export default function App() {
                 description="Se rellena automáticamente cuando completas los pronósticos de cada grupo."
               />
             </section>
+          ) : null}
+
+          {activeView === "eliminatorias" ? (
+            <EliminatoriasView
+              grupos={state.grupos}
+              knockoutPicks={knockoutPicks}
+              standingsPredictionsByMatchId={standingsPredictionsByMatchId}
+              predictionsLocked={predictionsLocked}
+              onToggleAdvancement={updateKnockoutPickDraft}
+              onSave={saveKnockoutPicks}
+              isDirty={knockoutPicksDirty}
+              isSaving={knockoutPicksSaving}
+              updatedAt={knockoutPicksUpdatedAt}
+            />
           ) : null}
 
           {activeView === "pronosticos-dieciseisavos" ? (

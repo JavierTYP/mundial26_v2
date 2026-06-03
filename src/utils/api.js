@@ -65,6 +65,17 @@ export function apiPutMyPrediction(matchId, local, visitante, winner = null) {
   });
 }
 
+export function apiGetMyKnockoutPicks() {
+  return apiFetch("/api/knockout-picks/me", { method: "GET" });
+}
+
+export function apiPutMyKnockoutPicks(picks) {
+  return apiFetch("/api/knockout-picks/me", {
+    method: "PUT",
+    body: JSON.stringify({ picks }),
+  });
+}
+
 export function apiGetMyGoleadores() {
   return apiFetch("/api/goleadores/me", { method: "GET" });
 }

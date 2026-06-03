@@ -557,6 +557,74 @@ function normalizeMvpPick(pick) {
   return { team, player };
 }
 
+const KNOCKOUT_PICK_ROUNDS = [
+  { key: "16avos", limit: 32, previousKey: null },
+  { key: "8avos", limit: 16, previousKey: "16avos" },
+  { key: "4tos", limit: 8, previousKey: "8avos" },
+  { key: "semis", limit: 4, previousKey: "4tos" },
+  { key: "final", limit: 2, previousKey: "semis" },
+  { key: "campeon", limit: 1, previousKey: "final" },
+];
+
+function normalizeKnockoutPicks(picks) {
+  const row = picks && typeof picks === "object" ? picks : {};
+  const normalized = {};
+
+  for (const round of KNOCKOUT_PICK_ROUNDS) {
+    const allowedPrevious = round.previousKey ? new Set(normalized[round.previousKey] ?? []) : null;
+    const seen = new Set();
+    const values = Array.isArray(row?.[round.key]) ? row[round.key] : [];
+
+    normalized[round.key] = values
+      .map((teamId) => String(teamId ?? "").trim())
+      .filter((teamId) => {
+        if (!teamId) return false;
+        if (seen.has(teamId)) return false;
+        if (allowedPrevious && !allowedPrevious.has(teamId)) return false;
+        seen.add(teamId);
+        return true;
+      })
+      .slice(0, round.limit);
+  }
+
+  return normalized;
+}
+
+app.get("/api/knockout-picks/me", async (req, res) => {
+  if (!requireAuth(req, res)) return;
+  const email = req.user.email;
+  const row = await dbGet(db, "SELECT picks_json, updated_at FROM knockout_picks WHERE email = ?", [
+    email,
+  ]);
+  const picksRaw = row?.picks_json ?? null;
+  const picks =
+    picksRaw && typeof picksRaw === "string"
+      ? jsonOrNull(picksRaw)
+      : picksRaw && typeof picksRaw === "object"
+        ? picksRaw
+        : null;
+  res.json({ email, picks: normalizeKnockoutPicks(picks), updatedAt: row?.updated_at ?? null });
+});
+
+app.put("/api/knockout-picks/me", async (req, res) => {
+  if (!requireAuth(req, res)) return;
+  if (await getPredictionsLocked()) {
+    res.status(409).json({ error: "predictions_locked" });
+    return;
+  }
+  const email = req.user.email;
+  const picks = normalizeKnockoutPicks(req.body?.picks);
+  const updatedAt = new Date().toISOString();
+  const picksValue = db?.__dbKind === "pg" ? picks : JSON.stringify(picks);
+  await dbRun(
+    db,
+    "INSERT INTO knockout_picks (email, picks_json, updated_at) VALUES (?, ?, ?) ON CONFLICT(email) DO UPDATE SET picks_json=excluded.picks_json, updated_at=excluded.updated_at",
+    [email, picksValue, updatedAt],
+  );
+  persistDb(db);
+  res.json({ ok: true, picks, updatedAt });
+});
+
 app.get("/api/goleadores/me", async (req, res) => {
   if (!requireAuth(req, res)) return;
   const email = req.user.email;
@@ -791,6 +859,7 @@ app.delete("/api/admin/users/:email", async (req, res) => {
     return;
   }
   await dbRun(db, "DELETE FROM predictions WHERE email = ?", [email]);
+  await dbRun(db, "DELETE FROM knockout_picks WHERE email = ?", [email]);
   await dbRun(db, "DELETE FROM users WHERE email = ?", [email]);
   persistDb(db);
   res.json({ ok: true });
@@ -799,6 +868,7 @@ app.delete("/api/admin/users/:email", async (req, res) => {
 app.post("/api/admin/users/clear-non-admin", async (req, res) => {
   if (!requireAdmin(req, res)) return;
   await dbRun(db, "DELETE FROM predictions WHERE email <> ?", [ADMIN_EMAIL]);
+  await dbRun(db, "DELETE FROM knockout_picks WHERE email <> ?", [ADMIN_EMAIL]);
   await dbRun(db, "DELETE FROM users WHERE email <> ?", [ADMIN_EMAIL]);
   persistDb(db);
   res.json({ ok: true });
@@ -821,10 +891,11 @@ app.get("/api/admin/predictions", async (req, res) => {
     predictions[r.match_id] = { local: r.local, visitante: r.visitante, winner: r.winner ?? null };
   }
 
-  const [goleadoresRow, mvpRow, zamoraRow] = await Promise.all([
+  const [goleadoresRow, mvpRow, zamoraRow, knockoutRow] = await Promise.all([
     dbGet(db, "SELECT picks_json, updated_at FROM goleadores_picks WHERE email = ?", [email]),
     dbGet(db, "SELECT pick_json, updated_at FROM mvp_picks WHERE email = ?", [email]),
     dbGet(db, "SELECT pick_json, updated_at FROM zamora_picks WHERE email = ?", [email]),
+    dbGet(db, "SELECT picks_json, updated_at FROM knockout_picks WHERE email = ?", [email]),
   ]);
 
   const goleadoresRaw = goleadoresRow?.picks_json ?? null;
@@ -851,9 +922,21 @@ app.get("/api/admin/predictions", async (req, res) => {
         ? zamoraRaw
         : null;
 
+  const knockoutRaw = knockoutRow?.picks_json ?? null;
+  const knockoutParsed =
+    knockoutRaw && typeof knockoutRaw === "string"
+      ? jsonOrNull(knockoutRaw)
+      : knockoutRaw && typeof knockoutRaw === "object"
+        ? knockoutRaw
+        : null;
+
   res.json({
     email,
     predictions,
+    knockout: {
+      picks: normalizeKnockoutPicks(knockoutParsed),
+      updatedAt: knockoutRow?.updated_at ?? null,
+    },
     goleadores: {
       picks: normalizeGoleadoresPicks(goleadoresParsed),
       updatedAt: goleadoresRow?.updated_at ?? null,
@@ -911,6 +994,25 @@ app.get("/api/admin/predictions/export", async (req, res) => {
       updatedAt: r.updated_at,
     };
   }
+  const knockoutRows = await dbAll(
+    db,
+    "SELECT email, picks_json, updated_at FROM knockout_picks ORDER BY email ASC",
+    [],
+  );
+  const knockoutPicksByUser = {};
+  for (const r of knockoutRows) {
+    const raw = r?.picks_json ?? null;
+    const parsed =
+      raw && typeof raw === "string"
+        ? jsonOrNull(raw)
+        : raw && typeof raw === "object"
+          ? raw
+          : null;
+    knockoutPicksByUser[r.email] = {
+      picks: normalizeKnockoutPicks(parsed),
+      updatedAt: r.updated_at,
+    };
+  }
 
   const payload = {
     type: "mundial2026_predictions_export",
@@ -926,6 +1028,7 @@ app.get("/api/admin/predictions/export", async (req, res) => {
     },
     users,
     predictionsByUser,
+    knockoutPicksByUser,
   };
 
   res.setHeader("Content-Type", "application/json; charset=utf-8");

@@ -27,6 +27,15 @@ create table if not exists public.mvp_picks (
 alter table public.mvp_picks enable row level security;
 revoke all on table public.mvp_picks from anon, authenticated;
 
+create table if not exists public.knockout_picks (
+  email text primary key references public.users(email) on delete cascade,
+  picks_json jsonb not null,
+  updated_at text not null
+);
+
+alter table public.knockout_picks enable row level security;
+revoke all on table public.knockout_picks from anon, authenticated;
+
 -- Admin-managed "real results" (single-row tables, id=1)
 create table if not exists public.goleadores_result (
   id integer primary key check (id = 1),
