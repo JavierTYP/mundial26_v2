@@ -176,13 +176,6 @@ export default function Sidebar({
             </>
           ) : null}
 
-          <NavButton
-            active={activeView === "clasificados"}
-            onClick={() => onNavigate("clasificados")}
-          >
-            Clasificación
-          </NavButton>
-
           <NavButton active={activeView === "resumen"} onClick={() => onNavigate("resumen")}>
             Resumen
           </NavButton>
@@ -191,7 +184,7 @@ export default function Sidebar({
             active={activeView === "puntuaciones"}
             onClick={() => onNavigate("puntuaciones")}
           >
-            Puntuaciones
+            Clasificación
           </NavButton>
 
           <NavButton active={activeView === "premios"} onClick={() => onNavigate("premios")}>

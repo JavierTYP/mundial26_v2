@@ -6,12 +6,12 @@ Fase de grupos:
 Eliminatorias:
 - 1 punto por cada equipo de "16avos"
 - 2 puntos por cada equipo de  "8avos"
-- 3 puntos por cada equipo de "4tos"
-- 4 puntos por cada equipo de "Semis"
-- 5 puntos por cada equipo de "Final"
+- 4 puntos por cada equipo de "4tos"
+- 6 puntos por cada equipo de "Semis"
+- 10 puntos por cada equipo de "Final"
 - 20 puntos por el equipo "Campeón"
 
 Premios individuales:
 - 10 puntos por 'Balón de oro'.
 - 10 puntos por 'Bota de oro'.
-- 10 puntos por 'Gualte de oro'.
+- 10 puntos por 'Guante de oro'.

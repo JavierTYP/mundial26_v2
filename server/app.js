@@ -560,9 +560,9 @@ function normalizeMvpPick(pick) {
 const KNOCKOUT_PICK_ROUNDS = [
   { key: "16avos", limit: 32, previousKey: null, points: 1 },
   { key: "8avos", limit: 16, previousKey: "16avos", points: 2 },
-  { key: "4tos", limit: 8, previousKey: "8avos", points: 3 },
-  { key: "semis", limit: 4, previousKey: "4tos", points: 4 },
-  { key: "final", limit: 2, previousKey: "semis", points: 5 },
+  { key: "4tos", limit: 8, previousKey: "8avos", points: 4 },
+  { key: "semis", limit: 4, previousKey: "4tos", points: 6 },
+  { key: "final", limit: 2, previousKey: "semis", points: 10 },
   { key: "campeon", limit: 1, previousKey: "final", points: 20 },
 ];
 

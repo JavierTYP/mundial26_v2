@@ -5,9 +5,9 @@ import { apiAdminScoreboard } from "../utils/api.js";
 const KNOCKOUT_SCORE_COLUMNS = [
   { key: "16avos", label: "16avos", multiplier: 1 },
   { key: "8avos", label: "8avos", multiplier: 2 },
-  { key: "4tos", label: "4tos", multiplier: 3 },
-  { key: "semis", label: "Semis", multiplier: 4 },
-  { key: "final", label: "Final", multiplier: 5 },
+  { key: "4tos", label: "4tos", multiplier: 4 },
+  { key: "semis", label: "Semis", multiplier: 6 },
+  { key: "final", label: "Final", multiplier: 10 },
   { key: "campeon", label: "Campeón", multiplier: 20 },
 ];
 

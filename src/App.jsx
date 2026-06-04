@@ -7,7 +7,6 @@ import Header from "./components/Header.jsx";
 import Card from "./components/Card.jsx";
 import GroupTabs from "./components/GroupTabs.jsx";
 import GroupCard from "./components/GroupCard.jsx";
-import ClassifiedGrid from "./components/ClassifiedGrid.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import GroupSummaryCard from "./components/GroupSummaryCard.jsx";
 import KnockoutBracket from "./components/KnockoutBracket.jsx";
@@ -481,6 +480,36 @@ export default function App() {
       cancelled = true;
     };
   }, []);
+
+  useEffect(() => {
+    if (!user?.email) return undefined;
+
+    let cancelled = false;
+    const syncLocks = async () => {
+      try {
+        const me = await apiMe();
+        if (cancelled) return;
+        setPredictionsLocked(Boolean(me?.settings?.predictionsLocked));
+        setResultsLocked(Boolean(me?.settings?.resultsLocked));
+      } catch {
+        // ignore transient session/network errors
+      }
+    };
+
+    const onFocus = () => {
+      void syncLocks();
+    };
+    window.addEventListener("focus", onFocus);
+    document.addEventListener("visibilitychange", onFocus);
+    const interval = window.setInterval(syncLocks, 10000);
+
+    return () => {
+      cancelled = true;
+      window.removeEventListener("focus", onFocus);
+      document.removeEventListener("visibilitychange", onFocus);
+      window.clearInterval(interval);
+    };
+  }, [user?.email]);
 
   useEffect(() => {
     if (!user?.email) return undefined;
@@ -1472,18 +1501,6 @@ export default function App() {
               onUpdatePrediction={updatePrediction}
               onUpdatePredictionDraft={updatePredictionDraft}
             />
-          ) : null}
-
-          {activeView === "clasificados" ? (
-            <section className="space-y-4">
-              <div className="flex flex-col gap-1">
-                <h2 className="text-2xl font-black tracking-tight">Clasificados</h2>
-                <p className="text-sm text-slate-300">
-                  Se habilitan cuando el grupo tiene todos los partidos completados.
-                </p>
-              </div>
-              <ClassifiedGrid grupos={state.grupos} />
-            </section>
           ) : null}
 
           {activeView === "puntuaciones" ? (

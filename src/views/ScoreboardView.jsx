@@ -5,9 +5,9 @@ import { apiScoreboard } from "../utils/api.js";
 const KNOCKOUT_SCORE_COLUMNS = [
   { key: "16avos", label: "16avos", multiplier: 1 },
   { key: "8avos", label: "8avos", multiplier: 2 },
-  { key: "4tos", label: "4tos", multiplier: 3 },
-  { key: "semis", label: "Semis", multiplier: 4 },
-  { key: "final", label: "Final", multiplier: 5 },
+  { key: "4tos", label: "4tos", multiplier: 4 },
+  { key: "semis", label: "Semis", multiplier: 6 },
+  { key: "final", label: "Final", multiplier: 10 },
   { key: "campeon", label: "Campeón", multiplier: 20 },
 ];
 
@@ -37,15 +37,34 @@ export default function ScoreboardView({ grupos }) {
     <section className="space-y-4">
       <div className="flex flex-col gap-1">
         <h2 className="text-2xl font-black tracking-tight">Puntuaciones</h2>
-        <p className="text-sm text-slate-300">
-          0 pts si no acierta ganador; 1 pt si acierta ganador/empate; 4 pts si acierta marcador exacto.
-          <br />
-          +10 puntos por 'Bal&#243;n de oro'.
-          <br />
-          +10 puntos por 'Bota de oro'.
-          <br />
-          +10 puntos por 'Gualte de oro'.
-        </p>
+        <div className="grid gap-3 text-sm text-slate-300 md:grid-cols-3">
+          <div>
+            <div className="font-black text-slate-100">Fase de grupos:</div>
+            <ul className="mt-1 space-y-1">
+              <li>- 1 punto si acierta ganador/empate</li>
+              <li>- 4 puntos si acierta marcador exacto</li>
+            </ul>
+          </div>
+          <div>
+            <div className="font-black text-slate-100">Eliminatorias:</div>
+            <ul className="mt-1 space-y-1">
+              {KNOCKOUT_SCORE_COLUMNS.map((column) => (
+                <li key={column.key}>
+                  - {column.multiplier} {column.multiplier === 1 ? "punto" : "puntos"} por{" "}
+                  {column.key === "campeon" ? "el equipo" : "cada equipo de"} "{column.label}"
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <div className="font-black text-slate-100">Premios individuales:</div>
+            <ul className="mt-1 space-y-1">
+              <li>- 10 puntos por 'Bal&#243;n de oro'.</li>
+              <li>- 10 puntos por 'Bota de oro'.</li>
+              <li>- 10 puntos por 'Guante de oro'.</li>
+            </ul>
+          </div>
+        </div>
       </div>
 
       <Card className="p-4">
