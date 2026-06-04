@@ -54,8 +54,8 @@ export default function Sidebar({
 
   const extraPronosticosItems = useMemo(
     () => [
-      { id: "goleadores", label: "Bota de oro" },
       { id: "mvp", label: "Balón de oro" },
+      { id: "goleadores", label: "Bota de oro" },
       { id: "zamora", label: "Guante de oro" },
     ],
     [],
@@ -71,8 +71,8 @@ export default function Sidebar({
 
   const adminResultadosExtraItems = useMemo(
     () => [
-      { id: "admin-goleadores", label: "Bota de oro" },
       { id: "admin-mvp", label: "Balón de oro" },
+      { id: "admin-goleadores", label: "Bota de oro" },
       { id: "admin-zamora", label: "Guante de oro" },
     ],
     [],

@@ -86,6 +86,160 @@ function formatAwardPick(pick, field = "player") {
   };
 }
 
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function safeFilename(value) {
+  return String(value ?? "usuario")
+    .trim()
+    .replace(/[^a-z0-9_-]+/gi, "_")
+    .replace(/^_+|_+$/g, "")
+    .slice(0, 80) || "usuario";
+}
+
+function buildPredictionsPdfHtml({ email, rows, awardRows, teamsById, predictions }) {
+  const today = new Date().toLocaleDateString("es-ES");
+  const matchRows = rows
+    .map((row) => {
+      if (row?.type === "separator") {
+        return `<tr class="separator"><td colspan="6"></td></tr>`;
+      }
+
+      const match = row.match ?? null;
+      const localId = matchLocalId(match);
+      const awayId = matchAwayId(match);
+      const localTeam = localId ? teamsById.get(localId) : null;
+      const awayTeam = awayId ? teamsById.get(awayId) : null;
+      const prediction = predictions?.[match?.id] ?? null;
+      const showTieWinner = !String(row.phase ?? "").toLowerCase().startsWith("grupo");
+      const tieWinner = showTieWinner ? tieWinnerFromPrediction(prediction, match) : null;
+      const tieWinnerTeam = tieWinner ? teamsById.get(tieWinner) : null;
+
+      return `
+        <tr>
+          <td>${escapeHtml(row.phase)}</td>
+          <td class="mono">${escapeHtml(match?.id ?? "-")}</td>
+          <td>${escapeHtml(localTeam?.nombre ?? (localId ? String(localId) : "Por definir"))}</td>
+          <td>${escapeHtml(awayTeam?.nombre ?? (awayId ? String(awayId) : "Por definir"))}</td>
+          <td class="score">${escapeHtml(formatPrediction(prediction))}</td>
+          <td>${escapeHtml(showTieWinner ? tieWinnerTeam?.nombre ?? (tieWinner ? String(tieWinner) : "-") : "-")}</td>
+        </tr>`;
+    })
+    .join("");
+
+  const awards = awardRows
+    .map(
+      (row) => `
+        <tr>
+          <td>${escapeHtml(row.award)}</td>
+          <td class="score">${escapeHtml(row.name)}</td>
+          <td>${escapeHtml(row.team)}</td>
+        </tr>`,
+    )
+    .join("");
+
+  return `<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Pronósticos - ${escapeHtml(email)}</title>
+  <style>
+    @page { margin: 14mm; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: #111827;
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 11px;
+      line-height: 1.35;
+    }
+    header {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: flex-end;
+      border-bottom: 2px solid #111827;
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+    }
+    h1 { margin: 0; font-size: 22px; letter-spacing: 0; }
+    h2 { margin: 18px 0 8px; font-size: 14px; }
+    .meta { color: #475569; text-align: right; }
+    .user { margin-top: 4px; font-weight: 700; }
+    table { width: 100%; border-collapse: collapse; page-break-inside: auto; }
+    thead { display: table-header-group; }
+    tr { page-break-inside: avoid; page-break-after: auto; }
+    th {
+      background: #e5e7eb;
+      border: 1px solid #cbd5e1;
+      color: #0f172a;
+      font-size: 9px;
+      letter-spacing: .04em;
+      padding: 6px;
+      text-align: left;
+      text-transform: uppercase;
+    }
+    td {
+      border: 1px solid #d7dee8;
+      padding: 6px;
+      vertical-align: top;
+    }
+    .mono { font-family: "Cascadia Mono", Consolas, monospace; font-size: 10px; }
+    .score { font-weight: 800; white-space: nowrap; }
+    .separator td {
+      border-left: 0;
+      border-right: 0;
+      height: 8px;
+      padding: 0;
+      background: #f8fafc;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div>
+      <h1>Pronósticos Mundial 2026</h1>
+      <div class="user">${escapeHtml(email)}</div>
+    </div>
+    <div class="meta">Exportado el ${escapeHtml(today)}</div>
+  </header>
+
+  <h2>Partidos</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Fase</th>
+        <th>Partido</th>
+        <th>Local</th>
+        <th>Visitante</th>
+        <th>Pronóstico</th>
+        <th>Ganador empate</th>
+      </tr>
+    </thead>
+    <tbody>${matchRows || `<tr><td colspan="6">No hay partidos para mostrar todavía.</td></tr>`}</tbody>
+  </table>
+
+  <h2>Premios individuales</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Premio</th>
+        <th>Pronóstico</th>
+        <th>Selección</th>
+      </tr>
+    </thead>
+    <tbody>${awards}</tbody>
+  </table>
+</body>
+</html>`;
+}
+
 export default function AdminPredictionsView({ torneo, grupos, users }) {
   const groupIds = useMemo(() => allGroupIds(grupos), [grupos]);
   const [selectedEmail, setSelectedEmail] = useState(users?.[0]?.email ?? "");
@@ -208,6 +362,27 @@ export default function AdminPredictionsView({ torneo, grupos, users }) {
     ];
   }, [awards]);
 
+  function exportSelectedUserPdf() {
+    if (!selectedEmail) return;
+    const html = buildPredictionsPdfHtml({
+      email: selectedEmail,
+      rows,
+      awardRows,
+      teamsById,
+      predictions,
+    });
+    const printWindow = window.open("", "_blank", "width=1100,height=800");
+    if (!printWindow) return;
+    printWindow.document.open();
+    printWindow.document.write(html);
+    printWindow.document.close();
+    printWindow.document.title = `pronosticos_${safeFilename(selectedEmail)}.pdf`;
+    printWindow.focus();
+    window.setTimeout(() => {
+      printWindow.print();
+    }, 250);
+  }
+
   return (
     <section className="space-y-4">
       <div className="flex flex-col gap-1">
@@ -253,6 +428,13 @@ export default function AdminPredictionsView({ torneo, grupos, users }) {
               onClick={() => setMode("summary")}
             >
               Resumen
+            </Button>
+            <Button
+              variant="secondary"
+              disabled={mode !== "user" || !selectedEmail}
+              onClick={exportSelectedUserPdf}
+            >
+              Exportar a PDF
             </Button>
             <Button
               variant="secondary"
