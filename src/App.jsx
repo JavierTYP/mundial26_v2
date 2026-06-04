@@ -35,7 +35,6 @@ import EliminatoriasView, {
 import ErrorBoundary from "./components/ErrorBoundary.jsx";
 
 import { advanceRound, buildDieciseisavos, winnerId } from "./utils/knockout.js";
-import { buildPredictedKnockoutTournament } from "./utils/predictedKnockout.js";
 import { withFifaRankingsOnGroups } from "./utils/fifaRanking.js";
 import {
   ADMIN_EMAIL,
@@ -753,10 +752,6 @@ export default function App() {
     );
   }, [knockoutPicks, savedKnockoutPicks]);
 
-  const predictedKnockoutTorneo = useMemo(() => {
-    return buildPredictedKnockoutTournament(state, standingsPredictionsByMatchId);
-  }, [standingsPredictionsByMatchId, state]);
-
   function updateKnockoutMatch(roundKey, matchId, local, visitante, ganadorPicked = null) {
     if (!isAdmin) {
       setNotification({
@@ -1412,10 +1407,6 @@ export default function App() {
                 </div>
               </Card>
 
-              <KnockoutBracket
-                torneo={predictedKnockoutTorneo}
-                description="Se rellena automáticamente cuando completas los pronósticos de cada grupo."
-              />
             </section>
           ) : null}
 
