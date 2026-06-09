@@ -4,7 +4,7 @@ import Button from "../components/Button.jsx";
 import SelectMenu from "../components/SelectMenu.jsx";
 import { parseCsv } from "../utils/csv.js";
 import { apiAdminGetMvpResult, apiAdminPutMvpResult } from "../utils/api.js";
-import goleadoresCsv from "../../data/goleadores.csv?raw";
+import jugadoresCsv from "../../data/jugadores.csv?raw";
 
 function normalizePick(pick) {
   const row = pick && typeof pick === "object" ? pick : {};
@@ -16,7 +16,7 @@ function normalizePick(pick) {
 
 export default function AdminMvpResultView({ resultsLocked = false }) {
   const { teamsByGroup, playersByTeam } = useMemo(() => {
-    const rows = parseCsv(goleadoresCsv);
+    const rows = parseCsv(jugadoresCsv);
     const byGroup = new Map();
     const players = new Map();
 

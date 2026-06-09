@@ -4,7 +4,7 @@ import Button from "../components/Button.jsx";
 import SelectMenu from "../components/SelectMenu.jsx";
 import { parseCsv } from "../utils/csv.js";
 import { apiAdminGetGoleadoresResult, apiAdminPutGoleadoresResult } from "../utils/api.js";
-import goleadoresCsv from "../../data/goleadores.csv?raw";
+import jugadoresCsv from "../../data/jugadores.csv?raw";
 
 function normalizePicks(picks) {
   const base = Array.isArray(picks) ? picks : [];
@@ -18,7 +18,7 @@ function normalizePicks(picks) {
 
 export default function AdminGoleadoresResultView({ resultsLocked = false }) {
   const { teamsByGroup, playersByTeam } = useMemo(() => {
-    const rows = parseCsv(goleadoresCsv);
+    const rows = parseCsv(jugadoresCsv);
     const byGroup = new Map();
     const players = new Map();
 
