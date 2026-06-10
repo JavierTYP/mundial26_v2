@@ -3,6 +3,7 @@ import Card from "../components/Card.jsx";
 import Button from "../components/Button.jsx";
 import Flag from "../components/Flag.jsx";
 import { apiAdminExportPredictions, apiAdminPredictions, apiAdminPredictionsSummary } from "../utils/api.js";
+import { getFlagUrl } from "../utils/flags.js";
 import { normalizeKnockoutPicks } from "./EliminatoriasView.jsx";
 
 const KNOCKOUT_ROUNDS = [
@@ -129,6 +130,42 @@ function safeFilename(value) {
     .slice(0, 80) || "usuario";
 }
 
+function pdfFlagHtml(teamOrName) {
+  const url = getFlagUrl(teamOrName);
+  if (!url) return "";
+  const name = typeof teamOrName === "string" ? teamOrName : teamOrName?.nombre ?? teamOrName?.name ?? "";
+  return `<img class="flag" src="${escapeHtml(url)}" alt="${escapeHtml(name ? `Bandera ${name}` : "Bandera")}" />`;
+}
+
+function pdfTeamHtml(team, fallback) {
+  const label = team?.nombre ?? fallback ?? "Por definir";
+  return `<span class="team">${pdfFlagHtml(team ?? label)}<span>${escapeHtml(label)}</span></span>`;
+}
+
+function pdfAwardPicksHtml(row) {
+  const picks = Array.isArray(row.picks) && row.picks.length
+    ? row.picks
+    : [{ name: row.name, team: row.team }];
+  return picks
+    .map((pick) => {
+      const name = String(pick?.name ?? "").trim() || "Pendiente";
+      const team = String(pick?.team ?? "").trim();
+      return `<span class="team line">${team && team !== "-" ? pdfFlagHtml(team) : ""}<span>${escapeHtml(name)}</span></span>`;
+    })
+    .join("");
+}
+
+function pdfTeamListHtml(row) {
+  const teams = Array.isArray(row.teams) && row.teams.length
+    ? row.teams
+    : String(row.team ?? "").split(",");
+  const names = teams.map((team) => String(team ?? "").trim()).filter((team) => team && team !== "-");
+  if (!names.length) return "-";
+  return names
+    .map((team) => `<span class="team line">${pdfFlagHtml(team)}<span>${escapeHtml(team)}</span></span>`)
+    .join("");
+}
+
 function buildPredictionsPdfHtml({ email, rows, knockoutPicks, awardRows, teamsById, predictions }) {
   const today = new Date().toLocaleDateString("es-ES");
   const matchRows = rows
@@ -144,8 +181,8 @@ function buildPredictionsPdfHtml({ email, rows, knockoutPicks, awardRows, teamsB
         <tr>
           <td>${escapeHtml(row.phase)}</td>
           <td class="mono">${escapeHtml(match?.id ?? "-")}</td>
-          <td>${escapeHtml(localTeam?.nombre ?? (localId ? String(localId) : "Por definir"))}</td>
-          <td>${escapeHtml(awayTeam?.nombre ?? (awayId ? String(awayId) : "Por definir"))}</td>
+          <td>${pdfTeamHtml(localTeam, localId ? String(localId) : "Por definir")}</td>
+          <td>${pdfTeamHtml(awayTeam, awayId ? String(awayId) : "Por definir")}</td>
           <td class="score">${escapeHtml(formatPrediction(prediction))}</td>
         </tr>`;
     })
@@ -154,12 +191,14 @@ function buildPredictionsPdfHtml({ email, rows, knockoutPicks, awardRows, teamsB
   const knockoutRows = KNOCKOUT_ROUNDS.map((round) => {
     const teams = knockoutPicks?.[round.key] ?? [];
     const names = teams.length
-      ? teams.map((teamId) => formatTeamName(teamsById, teamId)).join(", ")
+      ? teams
+          .map((teamId) => pdfTeamHtml(teamsById.get(teamId), formatTeamName(teamsById, teamId)))
+          .join("")
       : "Pendiente";
     return `
         <tr>
           <td>${escapeHtml(round.label)}</td>
-          <td>${escapeHtml(names)}</td>
+          <td><span class="team-list">${names}</span></td>
         </tr>`;
   }).join("");
 
@@ -168,8 +207,8 @@ function buildPredictionsPdfHtml({ email, rows, knockoutPicks, awardRows, teamsB
       (row) => `
         <tr>
           <td>${escapeHtml(row.award)}</td>
-          <td class="score">${escapeHtml(row.name)}</td>
-          <td>${escapeHtml(row.team)}</td>
+          <td class="score">${pdfAwardPicksHtml(row)}</td>
+          <td>${pdfTeamListHtml(row)}</td>
         </tr>`,
     )
     .join("");
@@ -222,6 +261,29 @@ function buildPredictionsPdfHtml({ email, rows, knockoutPicks, awardRows, teamsB
     }
     .mono { font-family: "Cascadia Mono", Consolas, monospace; font-size: 10px; }
     .score { font-weight: 800; white-space: nowrap; }
+    .team {
+      align-items: center;
+      display: inline-flex;
+      gap: 5px;
+      min-width: 0;
+      vertical-align: middle;
+    }
+    .team-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 10px;
+    }
+    .line {
+      display: flex;
+      margin-bottom: 3px;
+    }
+    .flag {
+      display: inline-block;
+      flex: 0 0 auto;
+      height: 11px;
+      object-fit: contain;
+      width: 16px;
+    }
   </style>
 </head>
 <body>
