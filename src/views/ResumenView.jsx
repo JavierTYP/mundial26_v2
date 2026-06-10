@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import Card from "../components/Card.jsx";
+import Flag from "../components/Flag.jsx";
 import {
   apiGetMyGoleadores,
   apiGetMyMvp,
@@ -49,6 +50,16 @@ function formatTeamName(teamsById, teamId) {
   const id = String(teamId ?? "").trim();
   if (!id) return "Pendiente";
   return teamsById.get(id)?.nombre ?? id;
+}
+
+function TeamName({ team, fallback = "Pendiente", className = "" }) {
+  const name = team?.nombre ?? fallback;
+  return (
+    <span className={`inline-flex min-w-0 items-center gap-2 ${className}`}>
+      {team ? <Flag team={team} className="h-4 w-4 shrink-0" /> : null}
+      <span className="min-w-0 truncate">{name}</span>
+    </span>
+  );
 }
 
 function formatAwardPick(pick, field) {
@@ -113,6 +124,8 @@ export default function ResumenView({
         out.push({
           phase: `Grupo ${gid}`,
           id: match?.id ?? "",
+          localId,
+          awayId,
           local: formatTeamName(teamsById, localId),
           visitante: formatTeamName(teamsById, awayId),
           prediction: formatPrediction(predictionsByMatchId?.[match?.id]),
@@ -125,9 +138,9 @@ export default function ResumenView({
   const awardRows = useMemo(() => {
     const goleador = Array.isArray(awards.goleadores) ? awards.goleadores[0] : null;
     return [
-      { label: "Balón de oro", value: formatAwardPick(awards.mvp, "player") },
-      { label: "Bota de oro", value: formatAwardPick(goleador, "player") },
-      { label: "Guante de oro", value: formatAwardPick(awards.zamora, "goalkeeper") },
+      { label: "Balón de oro", value: formatAwardPick(awards.mvp, "player"), team: awards.mvp?.team },
+      { label: "Bota de oro", value: formatAwardPick(goleador, "player"), team: goleador?.team },
+      { label: "Guante de oro", value: formatAwardPick(awards.zamora, "goalkeeper"), team: awards.zamora?.team },
     ];
   }, [awards]);
 
@@ -173,8 +186,12 @@ export default function ResumenView({
                   <td className="whitespace-nowrap px-4 py-3 font-mono text-xs text-slate-300">
                     {row.id || "-"}
                   </td>
-                  <td className="px-4 py-3 font-semibold text-slate-100">{row.local}</td>
-                  <td className="px-4 py-3 font-semibold text-slate-100">{row.visitante}</td>
+                  <td className="px-4 py-3 font-semibold text-slate-100">
+                    <TeamName team={teamsById.get(row.localId)} fallback={row.local} />
+                  </td>
+                  <td className="px-4 py-3 font-semibold text-slate-100">
+                    <TeamName team={teamsById.get(row.awayId)} fallback={row.visitante} />
+                  </td>
                   <td className="whitespace-nowrap px-4 py-3 font-black text-slate-100">
                     {row.prediction}
                   </td>
@@ -201,14 +218,18 @@ export default function ResumenView({
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {teams.length ? (
-                    teams.map((teamId) => (
-                      <span
-                        key={teamId}
-                        className="rounded-lg bg-slate-900 px-2.5 py-1 text-xs font-bold text-slate-100 ring-1 ring-slate-700/70"
-                      >
-                        {formatTeamName(teamsById, teamId)}
-                      </span>
-                    ))
+                    teams.map((teamId) => {
+                      const team = teamsById.get(teamId);
+                      return (
+                        <span
+                          key={teamId}
+                          className="inline-flex items-center gap-1.5 rounded-lg bg-slate-900 px-2.5 py-1 text-xs font-bold text-slate-100 ring-1 ring-slate-700/70"
+                        >
+                          {team ? <Flag team={team} className="h-4 w-4 shrink-0" /> : null}
+                          <span>{formatTeamName(teamsById, teamId)}</span>
+                        </span>
+                      );
+                    })
                   ) : (
                     <span className="text-sm text-slate-500">Pendiente</span>
                   )}
@@ -231,7 +252,10 @@ export default function ResumenView({
               <div className="text-xs font-black uppercase tracking-wide text-slate-400">
                 {row.label}
               </div>
-              <div className="font-semibold text-slate-100">{row.value}</div>
+              <div className="inline-flex min-w-0 items-center gap-2 font-semibold text-slate-100">
+                {row.team ? <Flag name={row.team} className="h-4 w-4 shrink-0" /> : null}
+                <span className="min-w-0 truncate">{row.value}</span>
+              </div>
             </div>
           ))}
         </div>
