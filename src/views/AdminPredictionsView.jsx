@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Card from "../components/Card.jsx";
 import Button from "../components/Button.jsx";
+import Flag from "../components/Flag.jsx";
 import { apiAdminExportPredictions, apiAdminPredictions, apiAdminPredictionsSummary } from "../utils/api.js";
 import { normalizeKnockoutPicks } from "./EliminatoriasView.jsx";
 
@@ -61,6 +62,45 @@ function formatTeamName(teamsById, teamId) {
   const id = String(teamId ?? "").trim();
   if (!id) return "Pendiente";
   return teamsById.get(id)?.nombre ?? id;
+}
+
+function TeamName({ team, name, fallback = "Por definir", className = "" }) {
+  const label = team?.nombre ?? name ?? fallback;
+  const hasFlag = Boolean(team || name);
+  return (
+    <span className={`inline-flex min-w-0 items-center gap-2 ${className}`}>
+      {hasFlag ? <Flag team={team} name={name} className="h-4 w-4 shrink-0" /> : null}
+      <span className="min-w-0 truncate">{label}</span>
+    </span>
+  );
+}
+
+function AwardNames({ picks, name, team }) {
+  const rows = Array.isArray(picks) && picks.length ? picks : [{ name, team }];
+  if (!rows.length) return <span>Pendiente</span>;
+  return (
+    <span className="flex min-w-0 flex-col gap-1">
+      {rows.map((pick, index) => (
+        <span key={`${pick.name}:${pick.team}:${index}`} className="inline-flex min-w-0 items-center gap-2">
+          {pick.team && pick.team !== "-" ? <Flag name={pick.team} className="h-4 w-4 shrink-0" /> : null}
+          <span className="min-w-0 truncate">{pick.name}</span>
+        </span>
+      ))}
+    </span>
+  );
+}
+
+function TeamListByName({ teams, fallback }) {
+  const values = Array.isArray(teams) && teams.length ? teams : String(fallback ?? "").split(",");
+  const names = values.map((team) => String(team ?? "").trim()).filter((team) => team && team !== "-");
+  if (!names.length) return <span>-</span>;
+  return (
+    <span className="flex min-w-0 flex-col gap-1">
+      {names.map((team, index) => (
+        <TeamName key={`${team}:${index}`} name={team} fallback={team} />
+      ))}
+    </span>
+  );
 }
 
 function formatAwardPick(pick, field = "player") {
@@ -310,14 +350,17 @@ export default function AdminPredictionsView({ torneo, grupos, users }) {
     const mvp = formatAwardPick(awards.mvp, "player");
     const zamora = formatAwardPick(awards.zamora, "goalkeeper");
     const goleadores = Array.isArray(awards.goleadores) ? awards.goleadores : [];
-    const goleadoresNames = goleadores.map((p) => formatAwardPick(p, "player").name).filter(Boolean);
-    const goleadoresTeams = goleadores.map((p) => formatAwardPick(p, "player").team).filter((v) => v && v !== "-");
+    const goleadoresPicks = goleadores.map((p) => formatAwardPick(p, "player"));
     return [
       { award: "Balón de oro", name: mvp.name, team: mvp.team },
       {
         award: "Bota de oro",
-        name: goleadoresNames.length ? goleadoresNames.join(", ") : "Pendiente",
-        team: goleadoresTeams.length ? goleadoresTeams.join(", ") : "-",
+        name: goleadoresPicks.length ? goleadoresPicks.map((p) => p.name).join(", ") : "Pendiente",
+        team: goleadoresPicks.length
+          ? goleadoresPicks.map((p) => p.team).filter((team) => team && team !== "-").join(", ") || "-"
+          : "-",
+        picks: goleadoresPicks,
+        teams: goleadoresPicks.map((p) => p.team),
       },
       { award: "Guante de oro", name: zamora.name, team: zamora.team },
     ];
@@ -460,10 +503,18 @@ export default function AdminPredictionsView({ torneo, grupos, users }) {
                           {match?.id ?? "-"}
                         </td>
                         <td className="px-4 py-3 font-semibold text-slate-100">
-                          {localTeam?.nombre ?? (localId ? String(localId) : "Por definir")}
+                          <TeamName
+                            team={localTeam}
+                            name={localId ? String(localId) : ""}
+                            fallback="Por definir"
+                          />
                         </td>
                         <td className="px-4 py-3 font-semibold text-slate-100">
-                          {awayTeam?.nombre ?? (awayId ? String(awayId) : "Por definir")}
+                          <TeamName
+                            team={awayTeam}
+                            name={awayId ? String(awayId) : ""}
+                            fallback="Por definir"
+                          />
                         </td>
                         <td className="whitespace-nowrap px-4 py-3 font-black text-slate-100">
                           {formatPrediction(prediction)}
@@ -492,14 +543,18 @@ export default function AdminPredictionsView({ torneo, grupos, users }) {
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {teams.length ? (
-                        teams.map((teamId) => (
-                          <span
-                            key={teamId}
-                            className="rounded-lg bg-slate-900 px-2.5 py-1 text-xs font-bold text-slate-100 ring-1 ring-slate-700/70"
-                          >
-                            {formatTeamName(teamsById, teamId)}
-                          </span>
-                        ))
+                        teams.map((teamId) => {
+                          const team = teamsById.get(teamId);
+                          return (
+                            <span
+                              key={teamId}
+                              className="inline-flex items-center gap-1.5 rounded-lg bg-slate-900 px-2.5 py-1 text-xs font-bold text-slate-100 ring-1 ring-slate-700/70"
+                            >
+                              {team ? <Flag team={team} className="h-4 w-4 shrink-0" /> : null}
+                              <span>{formatTeamName(teamsById, teamId)}</span>
+                            </span>
+                          );
+                        })
                       ) : (
                         <span className="text-sm text-slate-500">Pendiente</span>
                       )}
@@ -531,8 +586,12 @@ export default function AdminPredictionsView({ torneo, grupos, users }) {
                       <td className="whitespace-nowrap px-4 py-3 font-semibold text-slate-200">
                         {row.award}
                       </td>
-                      <td className="px-4 py-3 font-black text-slate-100">{row.name}</td>
-                      <td className="px-4 py-3 text-slate-200">{row.team}</td>
+                      <td className="px-4 py-3 font-black text-slate-100">
+                        <AwardNames picks={row.picks} name={row.name} team={row.team} />
+                      </td>
+                      <td className="px-4 py-3 text-slate-200">
+                        <TeamListByName teams={row.teams} fallback={row.team} />
+                      </td>
                     </tr>
                   ))}
                 </tbody>
@@ -563,7 +622,11 @@ export default function AdminPredictionsView({ torneo, grupos, users }) {
                     <th className="sticky left-0 z-10 bg-slate-950/80 px-3 py-2">Usuario</th>
                     {summary.matches.map((m) => (
                       <th key={m.id} className="whitespace-nowrap border-l border-slate-800 px-3 py-2">
-                        {m.localNombre ?? m.idLocal ?? "â€”"} vs {m.visitanteNombre ?? m.idVisitante ?? "â€”"}
+                        <span className="inline-flex items-center gap-1.5">
+                          <TeamName name={m.localNombre ?? m.idLocal} fallback="-" />
+                          <span className="text-slate-500">vs</span>
+                          <TeamName name={m.visitanteNombre ?? m.idVisitante} fallback="-" />
+                        </span>
                         <div className="text-[11px] font-semibold text-slate-500">{m.id}</div>
                       </th>
                     ))}
