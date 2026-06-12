@@ -76,50 +76,64 @@ export default function ScoreboardView({ grupos }) {
 
       <Card className="p-0">
         <div className="overflow-x-auto">
-          <table className="w-full border-separate border-spacing-0 text-sm">
+          <table className="min-w-[1120px] w-full table-fixed border-separate border-spacing-0 text-sm">
+            <colgroup>
+              <col className="w-20" />
+              <col className="w-40" />
+              <col className="w-24" />
+              <col className="w-28" />
+              <col className="w-28" />
+              <col className="w-24" />
+              <col className="w-24" />
+              <col className="w-24" />
+              {KNOCKOUT_SCORE_COLUMNS.map((column) => (
+                <col key={column.key} className={column.key === "campeon" ? "w-24" : "w-20"} />
+              ))}
+            </colgroup>
             <thead>
               <tr className="text-left text-xs font-black uppercase tracking-wide text-slate-300">
-                <th className="px-4 py-3">POSICIÓN</th>
-                <th className="px-4 py-3">NICK</th>
-                <th className="px-4 py-3 text-center">ACIERTOS (con resultado)</th>
-                <th className="px-4 py-3 text-center">ACIERTOS (sin resultado)</th>
-                <th className="px-4 py-3 text-center">Bota de oro</th>
-                <th className="px-4 py-3 text-center">Balón de oro</th>
-                <th className="px-4 py-3 text-center">Guante de oro</th>
+                <th className="px-3 py-3">POSICIÓN</th>
+                <th className="px-3 py-3">NICK</th>
+                <th className="px-3 py-3 text-center">TOTALES</th>
+                <th className="px-3 py-3 text-center leading-tight">ACIERTOS (con resultado)</th>
+                <th className="px-3 py-3 text-center leading-tight">ACIERTOS (sin resultado)</th>
+                <th className="px-3 py-3 text-center leading-tight">Bota de oro</th>
+                <th className="px-3 py-3 text-center leading-tight">Balón de oro</th>
+                <th className="px-3 py-3 text-center leading-tight">Guante de oro</th>
                 {KNOCKOUT_SCORE_COLUMNS.map((column) => (
-                  <th key={column.key} className="px-4 py-3 text-center">
+                  <th key={column.key} className="px-3 py-3 text-center leading-tight">
                     {column.label}
                   </th>
                 ))}
-                <th className="px-4 py-3 text-center">TOTALES</th>
               </tr>
             </thead>
             <tbody>
               {(data?.rows ?? []).map((r, idx) => (
                 <tr key={r.email} className="border-t border-slate-800">
-                  <td className="px-4 py-3 font-mono text-xs text-slate-300">{idx + 1}</td>
-                  <td className="px-4 py-3 font-semibold text-slate-100">{r.nick ?? "-"}</td>
-                  <td className="px-4 py-3 text-center font-black text-slate-100">
+                  <td className="px-3 py-3 font-mono text-xs text-slate-300">{idx + 1}</td>
+                  <td className="truncate px-3 py-3 font-semibold text-slate-100">{r.nick ?? "-"}</td>
+                  <td className="px-3 py-3 text-center font-black text-blue-200">{r.points}</td>
+                  <td className="px-3 py-3 text-center font-black text-slate-100">
                     {r.exactHits} <span className="text-xs font-semibold text-slate-500">(x4)</span>
                   </td>
-                  <td className="px-4 py-3 text-center font-black text-slate-100">
+                  <td className="px-3 py-3 text-center font-black text-slate-100">
                     {r.outcomeHits} <span className="text-xs font-semibold text-slate-500">(x1)</span>
                   </td>
-                  <td className="px-4 py-3 text-center font-black">
+                  <td className="px-3 py-3 text-center font-black">
                     {r.botaDeOroPoints ? (
                       <span className="text-emerald-200">+{r.botaDeOroPoints}</span>
                     ) : (
                       <span className="text-slate-500">-</span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-center font-black">
+                  <td className="px-3 py-3 text-center font-black">
                     {r.balonDeOroPoints ? (
                       <span className="text-emerald-200">+{r.balonDeOroPoints}</span>
                     ) : (
                       <span className="text-slate-500">-</span>
                     )}
                   </td>
-                  <td className="px-4 py-3 text-center font-black">
+                  <td className="px-3 py-3 text-center font-black">
                     {r.guanteDeOroPoints ? (
                       <span className="text-emerald-200">+{r.guanteDeOroPoints}</span>
                     ) : (
@@ -127,14 +141,13 @@ export default function ScoreboardView({ grupos }) {
                     )}
                   </td>
                   {KNOCKOUT_SCORE_COLUMNS.map((column) => (
-                    <td key={column.key} className="px-4 py-3 text-center font-black text-slate-100">
+                    <td key={column.key} className="px-3 py-3 text-center font-black text-slate-100">
                       {r.knockoutHits?.[column.key] ?? 0}{" "}
                       <span className="text-xs font-semibold text-slate-500">
                         (x{column.multiplier})
                       </span>
                     </td>
                   ))}
-                  <td className="px-4 py-3 text-center font-black text-blue-200">{r.points}</td>
                 </tr>
               ))}
               {!loading && !(data?.rows?.length) ? (

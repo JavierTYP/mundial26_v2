@@ -68,6 +68,17 @@ export default function PremiosView() {
                 {loading ? "…" : `${total}€`}
               </span>
             </div>
+            <div className="mt-3 grid gap-1 text-sm text-slate-200">
+              <div>
+                <span className="font-black text-slate-100">1er. ganador:</span> 110&euro;
+              </div>
+              <div>
+                <span className="font-black text-slate-100">2do. ganador:</span> 30&euro;
+              </div>
+              <div>
+                <span className="font-black text-slate-100">3er. ganador:</span> 15&euro;
+              </div>
+            </div>
           </div>
           <div>
             <div className="text-xs font-bold uppercase tracking-wide text-slate-300">
