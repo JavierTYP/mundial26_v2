@@ -1376,6 +1376,7 @@ export default function App() {
                 predictionsByMatchId={predictionsByMatchId}
                 knockoutPicks={knockoutPicks}
                 userEmail={user?.email}
+                isAdmin={isAdmin}
               />
             </ErrorBoundary>
           ) : null}

@@ -46,6 +46,13 @@ function formatPrediction(prediction) {
   return `${l} - ${v}`;
 }
 
+function formatResult(result) {
+  const l = result?.local;
+  const v = result?.visitante;
+  if (l == null || v == null) return "-";
+  return `${l} - ${v}`;
+}
+
 function formatTeamName(teamsById, teamId) {
   const id = String(teamId ?? "").trim();
   if (!id) return "Pendiente";
@@ -76,6 +83,7 @@ export default function ResumenView({
   predictionsByMatchId,
   knockoutPicks,
   userEmail,
+  isAdmin = false,
 }) {
   const teamsById = useMemo(() => buildTeamsIndex(torneo?.grupos), [torneo?.grupos]);
   const normalizedKnockoutPicks = useMemo(
@@ -128,12 +136,15 @@ export default function ResumenView({
           awayId,
           local: formatTeamName(teamsById, localId),
           visitante: formatTeamName(teamsById, awayId),
-          prediction: formatPrediction(predictionsByMatchId?.[match?.id]),
+          prediction: isAdmin
+            ? formatResult(match?.resultado)
+            : formatPrediction(predictionsByMatchId?.[match?.id]),
+          result: formatResult(match?.resultado),
         });
       }
     }
     return out;
-  }, [predictionsByMatchId, teamsById, torneo?.grupos]);
+  }, [isAdmin, predictionsByMatchId, teamsById, torneo?.grupos]);
 
   const awardRows = useMemo(() => {
     const goleador = Array.isArray(awards.goleadores) ? awards.goleadores[0] : null;
@@ -160,7 +171,7 @@ export default function ResumenView({
           </h3>
         </div>
         <div className="overflow-x-auto">
-          <table className="min-w-[760px] w-full border-collapse text-sm">
+          <table className="min-w-[860px] w-full border-collapse text-sm">
             <thead className="bg-slate-950/60">
               <tr className="text-left text-xs font-black uppercase tracking-wide text-slate-400">
                 <th className="px-4 py-3">Fase</th>
@@ -168,12 +179,13 @@ export default function ResumenView({
                 <th className="px-4 py-3">Local</th>
                 <th className="px-4 py-3">Visitante</th>
                 <th className="px-4 py-3">Pronóstico</th>
+                <th className="px-4 py-3">RESULTADOS</th>
               </tr>
             </thead>
             <tbody>
               {groupRows.length === 0 ? (
                 <tr>
-                  <td className="px-4 py-6 text-slate-300" colSpan={5}>
+                  <td className="px-4 py-6 text-slate-300" colSpan={6}>
                     No hay pronósticos de grupos para mostrar todavía.
                   </td>
                 </tr>
@@ -194,6 +206,9 @@ export default function ResumenView({
                   </td>
                   <td className="whitespace-nowrap px-4 py-3 font-black text-slate-100">
                     {row.prediction}
+                  </td>
+                  <td className="whitespace-nowrap px-4 py-3 font-black text-slate-100">
+                    {row.result}
                   </td>
                 </tr>
               ))}
