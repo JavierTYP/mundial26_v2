@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import Button from "../components/Button.jsx";
 import Card from "../components/Card.jsx";
-import bannerImg from "../assets/mundial2026-typsa_16x9.png";
+import bannerImg from "../assets/mundial2026-typsa_16x9.gif";
 import {
   ADMIN_EMAIL,
   ADMIN_PASSWORD,
