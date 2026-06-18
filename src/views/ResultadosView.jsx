@@ -45,6 +45,12 @@ function formatUserLabel(user) {
   return `${label.slice(0, 5)}...`;
 }
 
+function formatTeamCode(team, fallback) {
+  const label = String(team?.nombre ?? fallback ?? "").trim();
+  const compact = label.replace(/\s+/g, "");
+  return (compact || label).slice(0, 3).toLocaleUpperCase("es");
+}
+
 function sameScore(a, b) {
   if (!a || !b) return false;
   if (a.local == null || a.visitante == null || b.local == null || b.visitante == null) return false;
@@ -53,10 +59,11 @@ function sameScore(a, b) {
 
 function TeamLabel({ team, fallback }) {
   const label = team?.nombre ?? fallback ?? "Por definir";
+  const code = formatTeamCode(team, fallback);
   return (
-    <span className="inline-flex min-w-0 items-center gap-2">
+    <span className="inline-flex min-w-0 items-center gap-1.5" title={label}>
       <Flag team={team} name={label} className="h-4 w-5 shrink-0 rounded-[2px] object-cover" />
-      <span className="min-w-0 truncate">{label}</span>
+      <span className="font-mono text-xs font-black text-slate-100">{code || "---"}</span>
     </span>
   );
 }
@@ -107,7 +114,7 @@ export default function ResultadosView({ torneo }) {
   const users = data?.users ?? [];
   const adminEmail = data?.adminEmail ?? users[0]?.email ?? null;
   const predictionsByUser = data?.predictionsByUser ?? {};
-  const minTableWidth = `${Math.max(860, 260 + users.length * 72)}px`;
+  const minTableWidth = `${Math.max(740, 150 + users.length * 72)}px`;
 
   return (
     <section className="space-y-4">
@@ -151,7 +158,7 @@ export default function ResultadosView({ torneo }) {
           >
             <thead>
               <tr className="text-left text-xs font-black uppercase tracking-wide text-slate-300">
-                <th className="sticky left-0 top-0 z-30 w-[260px] bg-slate-950 px-4 py-3 shadow-[1px_0_0_0_rgba(30,41,59,1)]">
+                <th className="sticky left-0 top-0 z-30 w-[150px] bg-slate-950 px-3 py-3 shadow-[1px_0_0_0_rgba(30,41,59,1)]">
                   Partido
                 </th>
                 {users.map((u) => (
@@ -181,11 +188,11 @@ export default function ResultadosView({ torneo }) {
 
                 return (
                   <tr key={`${row.phase}:${row.match?.id}`} className="group">
-                    <td className="sticky left-0 z-10 border-t border-slate-800 bg-slate-950 px-4 py-3 shadow-[1px_0_0_0_rgba(30,41,59,1)] group-hover:bg-slate-900">
+                    <td className="sticky left-0 z-10 border-t border-slate-800 bg-slate-950 px-3 py-3 shadow-[1px_0_0_0_rgba(30,41,59,1)] group-hover:bg-slate-900">
                       <div className="flex min-w-0 flex-col gap-1">
-                        <div className="flex min-w-0 items-center gap-2 font-semibold text-slate-100">
+                        <div className="flex min-w-0 items-center gap-1.5 font-semibold text-slate-100">
                           <TeamLabel team={localTeam} fallback={row.localId} />
-                          <span className="shrink-0 text-xs font-black uppercase text-slate-500">vs</span>
+                          <span className="shrink-0 text-[10px] font-black uppercase text-slate-500">vs</span>
                           <TeamLabel team={awayTeam} fallback={row.awayId} />
                         </div>
                         <div className="font-mono text-[11px] font-semibold text-slate-500">
