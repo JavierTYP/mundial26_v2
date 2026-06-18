@@ -1,23 +1,14 @@
-import { differenceInDays, differenceInHours, differenceInMinutes } from "date-fns";
+import { differenceInCalendarDays } from "date-fns";
 import Badge from "./Badge.jsx";
 import Button from "./Button.jsx";
 import logoImg from "../assets/logo.png";
 import userImg from "../assets/user.png";
 
-function countdownParts(targetDate) {
+function worldCupDays(startDate) {
   const now = new Date();
-  const target = new Date(targetDate);
-  if (Number.isNaN(target.getTime())) return null;
-  const ms = target.getTime() - now.getTime();
-  if (ms <= 0) return { days: 0, hours: 0, minutes: 0 };
-
-  const days = differenceInDays(target, now);
-  const afterDays = new Date(now.getTime() + days * 24 * 60 * 60 * 1000);
-  const hours = differenceInHours(target, afterDays);
-  const afterHours = new Date(afterDays.getTime() + hours * 60 * 60 * 1000);
-  const minutes = differenceInMinutes(target, afterHours);
-
-  return { days, hours, minutes };
+  const start = new Date(startDate);
+  if (Number.isNaN(start.getTime())) return null;
+  return Math.max(0, differenceInCalendarDays(now, start));
 }
 
 export default function Header({
@@ -33,7 +24,7 @@ export default function Header({
   onExportPredictions,
   onOpenPlayer,
 }) {
-  const parts = countdownParts(torneo?.fechaInicio);
+  const daysOfWorldCup = worldCupDays(torneo?.fechaInicio);
   const avatarInner = (
     <div className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl bg-slate-900/60 ring-1 ring-slate-800">
       <img
@@ -103,9 +94,9 @@ export default function Header({
               </div>
               <div className="flex flex-wrap items-center gap-2 text-xs text-slate-300">
                 <Badge tone="red">{torneo?.nombre ?? "FIFA World Cup 2026"}</Badge>
-                {parts && (
+                {daysOfWorldCup != null && (
                   <Badge tone="neutral">
-                    Comienza en {parts.days}d {parts.hours}h {parts.minutes}m
+                    {daysOfWorldCup} días de mundial
                   </Badge>
                 )}
                 {lastSavedLabel && (

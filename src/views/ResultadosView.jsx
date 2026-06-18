@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import Card from "../components/Card.jsx";
 import Flag from "../components/Flag.jsx";
-import { apiResults } from "../utils/api.js";
+import { apiResults, apiScoreboard } from "../utils/api.js";
 
 function matchNumber(id) {
   const m = String(id ?? "").match(/(\d+)(?!.*\d)/);
@@ -75,9 +75,14 @@ export default function ResultadosView({ torneo }) {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    void apiResults()
-      .then((r) => {
-        if (!cancelled) setData(r);
+    void Promise.all([apiResults(), apiScoreboard(null)])
+      .then(([results, scoreboard]) => {
+        if (!cancelled) {
+          setData({
+            ...results,
+            scoreboardRows: Array.isArray(scoreboard?.rows) ? scoreboard.rows : [],
+          });
+        }
       })
       .catch(() => {
         if (!cancelled) setData(null);
@@ -111,7 +116,27 @@ export default function ResultadosView({ torneo }) {
     return out;
   }, [torneo?.grupos]);
 
-  const users = data?.users ?? [];
+  const users = useMemo(() => {
+    const rawUsers = data?.users ?? [];
+    const adminEmail = data?.adminEmail ?? rawUsers[0]?.email ?? null;
+    const adminUser = rawUsers.find((u) => u.email === adminEmail) ?? null;
+    const rankByEmail = new Map(
+      (data?.scoreboardRows ?? []).map((row, index) => [row.email, index]),
+    );
+    const rest = rawUsers
+      .filter((u) => u.email !== adminEmail)
+      .sort((a, b) => {
+        const rankA = rankByEmail.has(a.email) ? rankByEmail.get(a.email) : Number.POSITIVE_INFINITY;
+        const rankB = rankByEmail.has(b.email) ? rankByEmail.get(b.email) : Number.POSITIVE_INFINITY;
+        if (rankA !== rankB) return rankA - rankB;
+        const labelA = String(a.label ?? a.nick ?? a.email ?? "");
+        const labelB = String(b.label ?? b.nick ?? b.email ?? "");
+        return labelA.localeCompare(labelB, "es", { sensitivity: "base" });
+      });
+
+    return adminUser ? [adminUser, ...rest] : rest;
+  }, [data?.adminEmail, data?.scoreboardRows, data?.users]);
+
   const adminEmail = data?.adminEmail ?? users[0]?.email ?? null;
   const predictionsByUser = data?.predictionsByUser ?? {};
   const minTableWidth = `${Math.max(740, 150 + users.length * 72)}px`;
@@ -121,7 +146,7 @@ export default function ResultadosView({ torneo }) {
       <div className="flex flex-col gap-1">
         <h2 className="text-2xl font-black tracking-tight">Resultados</h2>
         <p className="text-sm text-slate-300">
-          Pronosticos de fase de grupos por participante. Los marcadores iguales al admin se marcan en rojo.
+          Pronosticos de fase de grupos por participante. Los marcadores iguales al admin se marcan en verde.
         </p>
       </div>
 
@@ -218,7 +243,7 @@ export default function ResultadosView({ torneo }) {
                               isAdminColumn
                                 ? "text-red-200"
                                 : matchesAdmin
-                                ? "bg-red-950/50 text-red-200 ring-1 ring-red-500/50"
+                                ? "bg-emerald-950/50 text-emerald-200 ring-1 ring-emerald-500/50"
                                 : isPending
                                   ? "text-slate-600"
                                   : "text-slate-100"
