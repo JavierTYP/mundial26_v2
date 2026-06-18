@@ -978,6 +978,59 @@ app.get("/api/admin/predictions/summary", async (req, res) => {
   res.json({ users, predictionsByUser, predictionsLocked: await getPredictionsLocked() });
 });
 
+app.get("/api/results", async (req, res) => {
+  if (!requireAuth(req, res)) return;
+
+  const userRows = await dbAll(db, "SELECT email, role, nick FROM users ORDER BY email ASC", []);
+  const adminUser = userRows.find((u) => u.email === ADMIN_EMAIL || u.role === "admin") ?? null;
+  const regularUsers = userRows
+    .filter((u) => u.email !== adminUser?.email)
+    .map((u) => ({
+      email: u.email,
+      role: u.role,
+      nick: u.nick ?? null,
+      label: String(u.nick ?? u.email ?? "").trim() || u.email,
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label, "es", { sensitivity: "base" }));
+
+  const users = [
+    ...(adminUser
+      ? [
+          {
+            email: adminUser.email,
+            role: adminUser.role,
+            nick: adminUser.nick ?? null,
+            label: "ADMIN",
+          },
+        ]
+      : []),
+    ...regularUsers,
+  ];
+
+  const predRows = await dbAll(
+    db,
+    "SELECT email, match_id, local, visitante, winner FROM predictions ORDER BY email ASC",
+    [],
+  );
+
+  const predictionsByUser = {};
+  for (const r of predRows) {
+    if (!predictionsByUser[r.email]) predictionsByUser[r.email] = {};
+    predictionsByUser[r.email][r.match_id] = {
+      local: r.local,
+      visitante: r.visitante,
+      winner: r.winner ?? null,
+    };
+  }
+
+  res.json({
+    users,
+    adminEmail: adminUser?.email ?? ADMIN_EMAIL,
+    predictionsByUser,
+    predictionsLocked: await getPredictionsLocked(),
+  });
+});
+
 app.get("/api/admin/predictions/export", async (req, res) => {
   if (!requireAdmin(req, res)) return;
 

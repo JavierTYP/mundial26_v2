@@ -172,6 +172,10 @@ export function apiAdminPredictionsSummary(groupId) {
   return apiFetch(`/api/admin/predictions/summary?${qs.toString()}`, { method: "GET" });
 }
 
+export function apiResults() {
+  return apiFetch("/api/results", { method: "GET" });
+}
+
 export async function apiAdminExportPredictions() {
   const res = await fetch("/api/admin/predictions/export", { credentials: "include" });
   if (!res.ok) {

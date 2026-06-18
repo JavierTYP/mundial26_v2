@@ -180,6 +180,10 @@ export default function Sidebar({
             Resumen
           </NavButton>
 
+          <NavButton active={activeView === "resultados"} onClick={() => onNavigate("resultados")}>
+            Resultados
+          </NavButton>
+
           <NavButton
             active={activeView === "puntuaciones"}
             onClick={() => onNavigate("puntuaciones")}

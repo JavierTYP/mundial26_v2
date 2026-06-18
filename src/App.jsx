@@ -22,6 +22,7 @@ import AdminZamoraResultView from "./views/AdminZamoraResultView.jsx";
 import ScoreboardView from "./views/ScoreboardView.jsx";
 import KnockoutPredictionsView from "./views/KnockoutPredictionsView.jsx";
 import ResumenView from "./views/ResumenView.jsx";
+import ResultadosView from "./views/ResultadosView.jsx";
 import PremiosView from "./views/PremiosView.jsx";
 import GoleadoresView from "./views/GoleadoresView.jsx";
 import ZamoraView from "./views/ZamoraView.jsx";
@@ -1378,6 +1379,12 @@ export default function App() {
                 userEmail={user?.email}
                 isAdmin={isAdmin}
               />
+            </ErrorBoundary>
+          ) : null}
+
+          {activeView === "resultados" ? (
+            <ErrorBoundary>
+              <ResultadosView torneo={state} />
             </ErrorBoundary>
           ) : null}
 
