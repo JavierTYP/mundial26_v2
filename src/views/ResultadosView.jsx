@@ -39,6 +39,12 @@ function formatScore(prediction) {
   return `${l}-${v}`;
 }
 
+function formatUserLabel(user) {
+  const label = String(user?.label ?? user?.nick ?? user?.email ?? "").trim();
+  if (label.length <= 6) return label;
+  return `${label.slice(0, 5)}...`;
+}
+
 function sameScore(a, b) {
   if (!a || !b) return false;
   if (a.local == null || a.visitante == null || b.local == null || b.visitante == null) return false;
@@ -101,7 +107,7 @@ export default function ResultadosView({ torneo }) {
   const users = data?.users ?? [];
   const adminEmail = data?.adminEmail ?? users[0]?.email ?? null;
   const predictionsByUser = data?.predictionsByUser ?? {};
-  const minTableWidth = `${Math.max(860, 260 + users.length * 92)}px`;
+  const minTableWidth = `${Math.max(860, 260 + users.length * 72)}px`;
 
   return (
     <section className="space-y-4">
@@ -151,10 +157,10 @@ export default function ResultadosView({ torneo }) {
                 {users.map((u) => (
                   <th
                     key={u.email}
-                    className="sticky top-0 z-20 w-[92px] border-l border-slate-800 bg-slate-950 px-3 py-3 text-center"
-                    title={u.nick ?? u.email}
+                    className="sticky top-0 z-20 w-[72px] border-l border-slate-800 bg-slate-950 px-2 py-3 text-center"
+                    title={u.label ?? u.nick ?? u.email}
                   >
-                    <span className="block truncate">{u.label ?? u.nick ?? u.email}</span>
+                    <span className="block whitespace-nowrap">{formatUserLabel(u)}</span>
                   </th>
                 ))}
               </tr>
@@ -198,7 +204,7 @@ export default function ResultadosView({ torneo }) {
                       return (
                         <td
                           key={`${u.email}:${row.match?.id}`}
-                          className="border-l border-t border-slate-800 px-3 py-3 text-center align-middle group-hover:bg-slate-900/70"
+                          className="border-l border-t border-slate-800 px-2 py-3 text-center align-middle group-hover:bg-slate-900/70"
                         >
                           <span
                             className={`inline-flex min-w-[44px] justify-center rounded-md px-2 py-1 font-black ${
