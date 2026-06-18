@@ -171,7 +171,7 @@ export default function ResultadosView({ torneo }) {
               {rows.map((row) => {
                 const localTeam = row.localId ? teamsById.get(row.localId) : null;
                 const awayTeam = row.awayId ? teamsById.get(row.awayId) : null;
-                const adminPrediction = predictionsByUser?.[adminEmail]?.[row.match?.id] ?? null;
+                const adminResult = row.match?.resultado ?? null;
 
                 return (
                   <tr key={`${row.phase}:${row.match?.id}`} className="group">
@@ -188,10 +188,12 @@ export default function ResultadosView({ torneo }) {
                       </div>
                     </td>
                     {users.map((u) => {
-                      const prediction = predictionsByUser?.[u.email]?.[row.match?.id] ?? null;
                       const isAdminColumn = u.email === adminEmail;
-                      const matchesAdmin = !isAdminColumn && sameScore(prediction, adminPrediction);
-                      const isPending = prediction?.local == null || prediction?.visitante == null;
+                      const score = isAdminColumn
+                        ? adminResult
+                        : predictionsByUser?.[u.email]?.[row.match?.id] ?? null;
+                      const matchesAdmin = !isAdminColumn && sameScore(score, adminResult);
+                      const isPending = score?.local == null || score?.visitante == null;
 
                       return (
                         <td
@@ -200,14 +202,16 @@ export default function ResultadosView({ torneo }) {
                         >
                           <span
                             className={`inline-flex min-w-[44px] justify-center rounded-md px-2 py-1 font-black ${
-                              matchesAdmin
+                              isAdminColumn
+                                ? "text-red-200"
+                                : matchesAdmin
                                 ? "bg-red-950/50 text-red-200 ring-1 ring-red-500/50"
                                 : isPending
                                   ? "text-slate-600"
                                   : "text-slate-100"
                             }`}
                           >
-                            {formatScore(prediction)}
+                            {formatScore(score)}
                           </span>
                         </td>
                       );
