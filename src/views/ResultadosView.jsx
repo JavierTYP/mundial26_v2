@@ -140,6 +140,11 @@ export default function ResultadosView({ torneo }) {
   const adminEmail = data?.adminEmail ?? users[0]?.email ?? null;
   const predictionsByUser = data?.predictionsByUser ?? {};
   const minTableWidth = `${Math.max(740, 150 + users.length * 72)}px`;
+  const participantCount = Math.max(
+    0,
+    users.filter((user) => user.email !== adminEmail).length,
+  );
+  const playedMatches = data?.playedMatches ?? 0;
 
   return (
     <section className="space-y-4">
@@ -153,13 +158,17 @@ export default function ResultadosView({ torneo }) {
       <Card className="p-4">
         <div className="grid gap-3 text-sm text-slate-300 md:grid-cols-3">
           <div>
-            <div className="text-xs font-bold uppercase tracking-wide text-slate-400">Partidos</div>
-            <div className="mt-1 font-black text-slate-100">{rows.length}</div>
+            <div className="text-xs font-bold uppercase tracking-wide text-slate-400">
+              Partidos jugados
+            </div>
+            <div className="mt-1 font-black text-slate-100">
+              {loading ? "Cargando..." : playedMatches}
+            </div>
           </div>
           <div>
             <div className="text-xs font-bold uppercase tracking-wide text-slate-400">Participantes</div>
             <div className="mt-1 font-black text-slate-100">
-              {loading ? "Cargando..." : users.length}
+              {loading ? "Cargando..." : participantCount}
             </div>
           </div>
           <div>
