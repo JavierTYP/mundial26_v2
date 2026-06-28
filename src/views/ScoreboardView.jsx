@@ -59,9 +59,9 @@ export default function ScoreboardView({ grupos }) {
           <div>
             <div className="font-black text-slate-100">Premios individuales:</div>
             <ul className="mt-1 space-y-1">
-              <li>- 10 puntos por 'Bal&#243;n de oro'.</li>
-              <li>- 10 puntos por 'Bota de oro'.</li>
-              <li>- 10 puntos por 'Guante de oro'.</li>
+              <li>- 10 puntos por "Balón de oro".</li>
+              <li>- 10 puntos por "Bota de oro".</li>
+              <li>- 10 puntos por "Guante de oro".</li>
             </ul>
           </div>
         </div>
@@ -83,12 +83,12 @@ export default function ScoreboardView({ grupos }) {
               <col className="w-24" />
               <col className="w-28" />
               <col className="w-28" />
-              <col className="w-24" />
-              <col className="w-24" />
-              <col className="w-24" />
               {KNOCKOUT_SCORE_COLUMNS.map((column) => (
                 <col key={column.key} className={column.key === "campeon" ? "w-24" : "w-20"} />
               ))}
+              <col className="w-24" />
+              <col className="w-24" />
+              <col className="w-24" />
             </colgroup>
             <thead>
               <tr className="text-left text-xs font-black uppercase tracking-wide text-slate-300">
@@ -97,14 +97,14 @@ export default function ScoreboardView({ grupos }) {
                 <th className="px-3 py-3 text-center">TOTALES</th>
                 <th className="px-3 py-3 text-center leading-tight">ACIERTOS (con resultado)</th>
                 <th className="px-3 py-3 text-center leading-tight">ACIERTOS (sin resultado)</th>
-                <th className="px-3 py-3 text-center leading-tight">Bota de oro</th>
-                <th className="px-3 py-3 text-center leading-tight">Balón de oro</th>
-                <th className="px-3 py-3 text-center leading-tight">Guante de oro</th>
                 {KNOCKOUT_SCORE_COLUMNS.map((column) => (
                   <th key={column.key} className="px-3 py-3 text-center leading-tight">
                     {column.label}
                   </th>
                 ))}
+                <th className="px-3 py-3 text-center leading-tight">BOTA DE ORO</th>
+                <th className="px-3 py-3 text-center leading-tight">BALÓN DE ORO</th>
+                <th className="px-3 py-3 text-center leading-tight">GUANTE DE ORO</th>
               </tr>
             </thead>
             <tbody>
@@ -119,6 +119,14 @@ export default function ScoreboardView({ grupos }) {
                   <td className="px-3 py-3 text-center font-black text-slate-100">
                     {r.outcomeHits} <span className="text-xs font-semibold text-slate-500">(x1)</span>
                   </td>
+                  {KNOCKOUT_SCORE_COLUMNS.map((column) => (
+                    <td key={column.key} className="px-3 py-3 text-center font-black text-slate-100">
+                      {r.knockoutHits?.[column.key] ?? 0}{" "}
+                      <span className="text-xs font-semibold text-slate-500">
+                        (x{column.multiplier})
+                      </span>
+                    </td>
+                  ))}
                   <td className="px-3 py-3 text-center font-black">
                     {r.botaDeOroPoints ? (
                       <span className="text-emerald-200">+{r.botaDeOroPoints}</span>
@@ -140,14 +148,6 @@ export default function ScoreboardView({ grupos }) {
                       <span className="text-slate-500">-</span>
                     )}
                   </td>
-                  {KNOCKOUT_SCORE_COLUMNS.map((column) => (
-                    <td key={column.key} className="px-3 py-3 text-center font-black text-slate-100">
-                      {r.knockoutHits?.[column.key] ?? 0}{" "}
-                      <span className="text-xs font-semibold text-slate-500">
-                        (x{column.multiplier})
-                      </span>
-                    </td>
-                  ))}
                 </tr>
               ))}
               {!loading && !(data?.rows?.length) ? (
