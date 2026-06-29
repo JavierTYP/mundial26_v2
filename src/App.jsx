@@ -1288,13 +1288,6 @@ export default function App() {
           {activeView === "inicio" ? (
             <>
               <section className="space-y-4">
-                <div className="flex flex-col gap-1">
-                  <h2 className="text-2xl font-black tracking-tight">Eliminatorias</h2>
-                  <p className="text-sm text-slate-300">
-                    Visualiza el cuadro de eliminatorias según los resultados reales actuales.
-                  </p>
-                </div>
-
                 <KnockoutBracket torneo={state} />
               </section>
 
