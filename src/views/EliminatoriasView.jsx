@@ -80,12 +80,6 @@ function buildRows(grupos, standingsPredictionsByMatchId) {
     );
 }
 
-function formatTeamCode(team, fallback) {
-  const label = String(team?.nombre ?? fallback ?? "").trim();
-  const compact = label.replace(/\s+/g, "");
-  return (compact || label).slice(0, 3).toLocaleUpperCase("es");
-}
-
 export default function EliminatoriasView({
   grupos,
   knockoutPicks,
@@ -175,11 +169,9 @@ export default function EliminatoriasView({
                     </span>
                   </td>
                   <td className="p-3 font-semibold text-white">
-                    <span className="inline-flex items-center gap-2" title={team.nombre}>
+                    <span className="inline-flex items-center gap-2">
                       <Flag team={team} className="h-4 w-4" />
-                      <span className="font-mono text-sm font-black text-slate-100">
-                        {formatTeamCode(team, team.id) || "---"}
-                      </span>
+                      {team.nombre}
                     </span>
                   </td>
                   {ADVANCEMENT_ROUNDS.map((round) => {

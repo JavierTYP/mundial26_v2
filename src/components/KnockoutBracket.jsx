@@ -43,7 +43,14 @@ function loserTeamId(match) {
   return null;
 }
 
+function formatTeamCode(team, fallback) {
+  const label = String(team?.nombre ?? fallback ?? "").trim();
+  const compact = label.replace(/\s+/g, "");
+  return (compact || label).slice(0, 3).toLocaleUpperCase("es");
+}
+
 function TeamLine({ team, teamName, score, faded = false }) {
+  const teamCode = formatTeamCode(team, teamName);
   return (
     <div
       className={`flex h-9 items-center justify-between gap-3 rounded-lg border border-slate-800 bg-slate-950/50 px-3 text-xs ${
@@ -58,7 +65,7 @@ function TeamLine({ team, teamName, score, faded = false }) {
             className="h-4 w-5 shrink-0 rounded-[2px] object-cover ring-1 ring-white/10"
           />
         ) : null}
-        <div className="min-w-0 flex-1 truncate font-semibold">{teamName}</div>
+        <div className="min-w-0 flex-1 truncate font-mono font-black">{teamCode || "---"}</div>
       </div>
       <div className="w-6 text-right font-black text-slate-200">
         {score == null ? " " : score}
