@@ -53,21 +53,21 @@ function TeamLine({ team, teamName, score, faded = false }) {
   const teamCode = formatTeamCode(team, teamName);
   return (
     <div
-      className={`flex h-8 items-center justify-between gap-2 rounded-lg border border-slate-800 bg-slate-950/50 px-2.5 text-[11px] ${
+      className={`flex h-7.5 items-center justify-between gap-1.5 rounded-lg border border-slate-800 bg-slate-950/50 px-2 text-[10px] ${
         faded ? "text-slate-500" : "text-slate-100"
       }`}
       title={teamName}
     >
-      <div className="flex min-w-0 flex-1 items-center gap-1.5">
+      <div className="flex min-w-0 flex-1 items-center gap-1">
         {team ? (
           <Flag
             team={team}
-            className="h-3.5 w-4.5 shrink-0 rounded-[2px] object-cover ring-1 ring-white/10"
+            className="h-3 w-4 shrink-0 rounded-[2px] object-cover ring-1 ring-white/10"
           />
         ) : null}
         <div className="min-w-0 flex-1 truncate font-mono font-black">{teamCode || "---"}</div>
       </div>
-      <div className="w-5 text-right font-black text-slate-200">
+      <div className="w-4 text-right font-black text-slate-200">
         {score == null ? " " : score}
       </div>
     </div>
@@ -178,8 +178,8 @@ export default function KnockoutBracket({
       </div>
 
       <div className="mt-4 overflow-x-auto bracket-scroll">
-        <div className="min-w-[1320px]">
-          <div className="grid grid-cols-[repeat(9,minmax(128px,1fr))] gap-5 text-center text-[11px] font-black uppercase tracking-wide text-slate-400">
+        <div className="min-w-[1220px]">
+          <div className="grid grid-cols-[repeat(9,minmax(116px,1fr))] gap-4 text-center text-[11px] font-black uppercase tracking-wide text-slate-400">
             <div>16avos</div>
             <div>8avos</div>
             <div>4tos</div>
@@ -191,7 +191,7 @@ export default function KnockoutBracket({
             <div>16avos</div>
           </div>
 
-          <div className="mt-4 grid grid-cols-[repeat(9,minmax(128px,1fr))] gap-5">
+          <div className="mt-4 grid grid-cols-[repeat(9,minmax(116px,1fr))] gap-4">
             <div className="flex flex-col" style={{ gap: `${GAP_16}px` }}>
               {col16Left.map((m) => (
                 <MatchCard key={m.id} match={m} teamIndex={teamIndex} />
@@ -229,7 +229,7 @@ export default function KnockoutBracket({
               className="flex flex-col items-center gap-6"
               style={{ paddingTop: `${SLOT_16 * 3}px` }}
             >
-              <div className="w-full max-w-[220px] rounded-2xl border border-slate-800 bg-slate-950/30 p-3">
+              <div className="w-full max-w-[200px] rounded-2xl border border-slate-800 bg-slate-950/30 p-3">
                 <div className="text-center text-xs font-black uppercase tracking-wide text-slate-300">
                   Final
                 </div>
@@ -238,7 +238,7 @@ export default function KnockoutBracket({
                 </div>
               </div>
 
-              <div className="w-full max-w-[220px] rounded-2xl border border-slate-800 bg-slate-950/30 p-3">
+              <div className="w-full max-w-[200px] rounded-2xl border border-slate-800 bg-slate-950/30 p-3">
                 <div className="text-center text-xs font-black uppercase tracking-wide text-slate-300">
                   3er puesto
                 </div>
