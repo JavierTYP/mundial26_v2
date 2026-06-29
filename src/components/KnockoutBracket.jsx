@@ -178,8 +178,8 @@ export default function KnockoutBracket({
       </div>
 
       <div className="mt-4 overflow-x-auto bracket-scroll">
-        <div className="min-w-[1220px]">
-          <div className="grid grid-cols-[repeat(9,minmax(116px,1fr))] gap-4 text-center text-[11px] font-black uppercase tracking-wide text-slate-400">
+        <div className="min-w-[980px]">
+          <div className="grid grid-cols-[repeat(9,minmax(88px,1fr))] gap-4 text-center text-[11px] font-black uppercase tracking-wide text-slate-400">
             <div>16avos</div>
             <div>8avos</div>
             <div>4tos</div>
@@ -191,7 +191,7 @@ export default function KnockoutBracket({
             <div>16avos</div>
           </div>
 
-          <div className="mt-4 grid grid-cols-[repeat(9,minmax(116px,1fr))] gap-4">
+          <div className="mt-4 grid grid-cols-[repeat(9,minmax(88px,1fr))] gap-4">
             <div className="flex flex-col" style={{ gap: `${GAP_16}px` }}>
               {col16Left.map((m) => (
                 <MatchCard key={m.id} match={m} teamIndex={teamIndex} />
@@ -229,7 +229,7 @@ export default function KnockoutBracket({
               className="flex flex-col items-center gap-6"
               style={{ paddingTop: `${SLOT_16 * 3}px` }}
             >
-              <div className="w-full max-w-[200px] rounded-2xl border border-slate-800 bg-slate-950/30 p-3">
+              <div className="w-full max-w-[150px] rounded-2xl border border-slate-800 bg-slate-950/30 p-3">
                 <div className="text-center text-xs font-black uppercase tracking-wide text-slate-300">
                   Final
                 </div>
@@ -238,7 +238,7 @@ export default function KnockoutBracket({
                 </div>
               </div>
 
-              <div className="w-full max-w-[200px] rounded-2xl border border-slate-800 bg-slate-950/30 p-3">
+              <div className="w-full max-w-[150px] rounded-2xl border border-slate-800 bg-slate-950/30 p-3">
                 <div className="text-center text-xs font-black uppercase tracking-wide text-slate-300">
                   3er puesto
                 </div>
