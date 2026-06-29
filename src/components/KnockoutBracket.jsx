@@ -53,21 +53,21 @@ function TeamLine({ team, teamName, score, faded = false }) {
   const teamCode = formatTeamCode(team, teamName);
   return (
     <div
-      className={`flex h-7.5 items-center justify-between gap-1.5 rounded-lg border border-slate-800 bg-slate-950/50 px-2 text-[10px] ${
+      className={`flex h-8 items-center justify-between gap-2 rounded-lg border border-slate-800 bg-slate-950/50 px-2.5 text-[11px] ${
         faded ? "text-slate-500" : "text-slate-100"
       }`}
       title={teamName}
     >
-      <div className="flex min-w-0 flex-1 items-center gap-1">
+      <div className="flex min-w-0 flex-1 items-center gap-1.5">
         {team ? (
           <Flag
             team={team}
-            className="h-3 w-4 shrink-0 rounded-[2px] object-cover ring-1 ring-white/10"
+            className="h-3.5 w-4.5 shrink-0 rounded-[2px] object-cover ring-1 ring-white/10"
           />
         ) : null}
         <div className="min-w-0 flex-1 truncate font-mono font-black">{teamCode || "---"}</div>
       </div>
-      <div className="w-4 text-right font-black text-slate-200">
+      <div className="w-5 text-right font-black text-slate-200">
         {score == null ? " " : score}
       </div>
     </div>
