@@ -53,21 +53,21 @@ function TeamLine({ team, teamName, score, faded = false }) {
   const teamCode = formatTeamCode(team, teamName);
   return (
     <div
-      className={`flex h-9 items-center justify-between gap-3 rounded-lg border border-slate-800 bg-slate-950/50 px-3 text-xs ${
+      className={`flex h-8 items-center justify-between gap-2 rounded-lg border border-slate-800 bg-slate-950/50 px-2.5 text-[11px] ${
         faded ? "text-slate-500" : "text-slate-100"
       }`}
       title={teamName}
     >
-      <div className="flex min-w-0 flex-1 items-center gap-2">
+      <div className="flex min-w-0 flex-1 items-center gap-1.5">
         {team ? (
           <Flag
             team={team}
-            className="h-4 w-5 shrink-0 rounded-[2px] object-cover ring-1 ring-white/10"
+            className="h-3.5 w-4.5 shrink-0 rounded-[2px] object-cover ring-1 ring-white/10"
           />
         ) : null}
         <div className="min-w-0 flex-1 truncate font-mono font-black">{teamCode || "---"}</div>
       </div>
-      <div className="w-6 text-right font-black text-slate-200">
+      <div className="w-5 text-right font-black text-slate-200">
         {score == null ? " " : score}
       </div>
     </div>
@@ -85,7 +85,7 @@ function MatchCard({ title, match, teamIndex, fallbackLabel = null, showMatchId 
   const hasTeams = Boolean(match?.local) || Boolean(match?.visitante);
 
   return (
-    <div className="h-[92px] space-y-2">
+    <div className="h-[78px] space-y-1.5">
       {title ? (
         <div className="text-[11px] font-black uppercase tracking-wide text-slate-400">{title}</div>
       ) : null}
@@ -117,8 +117,8 @@ export default function KnockoutBracket({
 }) {
   // Layout tuned to keep rounds vertically aligned by making each match card a fixed height
   // and spacing columns based on a shared "slot" size.
-  const MATCH_H = 92; // px (must match MatchCard height)
-  const GAP_16 = 24; // px gap between 16avos matches
+  const MATCH_H = 78; // px (must match MatchCard height)
+  const GAP_16 = 18; // px gap between 16avos matches
   const SLOT_16 = MATCH_H + GAP_16; // px vertical distance between match tops in 16avos
 
   const teamIndex = useMemo(() => buildTeamIndex(torneo?.grupos), [torneo?.grupos]);
@@ -229,7 +229,7 @@ export default function KnockoutBracket({
               className="flex flex-col items-center gap-6"
               style={{ paddingTop: `${SLOT_16 * 3}px` }}
             >
-              <div className="w-full max-w-[240px] rounded-2xl border border-slate-800 bg-slate-950/30 p-3">
+              <div className="w-full max-w-[220px] rounded-2xl border border-slate-800 bg-slate-950/30 p-3">
                 <div className="text-center text-xs font-black uppercase tracking-wide text-slate-300">
                   Final
                 </div>
@@ -238,7 +238,7 @@ export default function KnockoutBracket({
                 </div>
               </div>
 
-              <div className="w-full max-w-[240px] rounded-2xl border border-slate-800 bg-slate-950/30 p-3">
+              <div className="w-full max-w-[220px] rounded-2xl border border-slate-800 bg-slate-950/30 p-3">
                 <div className="text-center text-xs font-black uppercase tracking-wide text-slate-300">
                   3er puesto
                 </div>
